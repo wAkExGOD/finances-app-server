@@ -28,11 +28,11 @@ export class AuthService {
   }
 
   login(user: User) {
-    const payload = { email: user.email, id: user.id };
+    const payload = { email: user.email, id: +user.id };
 
     return {
       user: payload,
-      access_token: this.jwtService.sign({ payload }),
+      access_token: this.jwtService.sign(payload),
     };
   }
 
@@ -47,6 +47,9 @@ export class AuthService {
       password: await argon2.hash(user.password),
     });
 
-    return this.login(createdUser);
+    return this.login({
+      ...createdUser,
+      id: `${createdUser.id}`,
+    });
   }
 }

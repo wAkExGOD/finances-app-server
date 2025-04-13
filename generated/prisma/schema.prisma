@@ -15,14 +15,27 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   password  String
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
+  purchases Purchase[]
 }
 
-model Task {
-  id     Int      @id @default(autoincrement())
-  name   String
-  isDone Boolean? @default(false)
+model PurchaseCategory {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  purchases Purchase[]
+}
+
+model Purchase {
+  id         Int              @id @default(autoincrement())
+  name       String
+  categoryId Int
+  price      Float
+  creator    User             @relation(fields: [createdBy], references: [id])
+  createdBy  Int
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  category   PurchaseCategory @relation(fields: [categoryId], references: [id])
 }

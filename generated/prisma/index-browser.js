@@ -124,10 +124,19 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.TaskScalarFieldEnum = {
+exports.Prisma.PurchaseCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.PurchaseScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  isDone: 'isDone'
+  categoryId: 'categoryId',
+  price: 'price',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -140,15 +149,11 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Task: 'Task'
+  PurchaseCategory: 'PurchaseCategory',
+  Purchase: 'Purchase'
 };
 
 /**

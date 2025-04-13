@@ -1,4 +1,8 @@
 export type User = {
-  id: number;
+  id: string;
   email: string;
+};
+
+export type RequestWithUser = {
+  user: User;
 };

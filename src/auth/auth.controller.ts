@@ -10,11 +10,7 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { User } from 'src/types';
-
-type Request = {
-  user: User;
-};
+import { RequestWithUser } from 'src/types';
 
 @Controller('auth')
 export class AuthController {
@@ -22,7 +18,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req: Request) {
+  login(@Request() req: RequestWithUser) {
     return this.authService.login(req.user);
   }
 
@@ -33,7 +29,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req: Request) {
+  getProfile(@Request() req: RequestWithUser) {
     return req.user;
   }
 }
