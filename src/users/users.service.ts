@@ -27,4 +27,15 @@ export class UsersService {
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user (${updateUserDto.email})`;
   }
+
+  async verify(id: number) {
+    return await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        verified: true,
+      },
+    });
+  }
 }

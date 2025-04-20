@@ -2,10 +2,13 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Request,
+  Res,
   UseGuards,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -33,5 +36,10 @@ export class AuthController {
   @Get('profile')
   async getProfile(@Request() req: RequestWithUser) {
     return await this.authService.getProfileByEmail(req.user.email);
+  }
+
+  @Get('confirm/:token')
+  async confirmEmail(@Res() res: Response, @Param('token') token: string) {
+    return await this.authService.confirmEmail(token, res);
   }
 }

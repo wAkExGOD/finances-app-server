@@ -120,8 +120,9 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  createdAt: 'createdAt',
   password: 'password',
-  createdAt: 'createdAt'
+  verified: 'verified'
 };
 
 exports.Prisma.PurchaseCategoryScalarFieldEnum = {
@@ -132,11 +133,16 @@ exports.Prisma.PurchaseCategoryScalarFieldEnum = {
 exports.Prisma.PurchaseScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  categoryId: 'categoryId',
   price: 'price',
   createdBy: 'createdBy',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.ConfirmEmailTokensScalarFieldEnum = {
+  userId: 'userId',
+  token: 'token'
 };
 
 exports.Prisma.SortOrder = {
@@ -153,7 +159,8 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   User: 'User',
   PurchaseCategory: 'PurchaseCategory',
-  Purchase: 'Purchase'
+  Purchase: 'Purchase',
+  ConfirmEmailTokens: 'ConfirmEmailTokens'
 };
 
 /**

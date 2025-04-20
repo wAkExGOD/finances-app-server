@@ -28,6 +28,11 @@ export type PurchaseCategory = $Result.DefaultSelection<Prisma.$PurchaseCategory
  * 
  */
 export type Purchase = $Result.DefaultSelection<Prisma.$PurchasePayload>
+/**
+ * Model ConfirmEmailTokens
+ * 
+ */
+export type ConfirmEmailTokens = $Result.DefaultSelection<Prisma.$ConfirmEmailTokensPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get purchase(): Prisma.PurchaseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.confirmEmailTokens`: Exposes CRUD operations for the **ConfirmEmailTokens** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConfirmEmailTokens
+    * const confirmEmailTokens = await prisma.confirmEmailTokens.findMany()
+    * ```
+    */
+  get confirmEmailTokens(): Prisma.ConfirmEmailTokensDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     PurchaseCategory: 'PurchaseCategory',
-    Purchase: 'Purchase'
+    Purchase: 'Purchase',
+    ConfirmEmailTokens: 'ConfirmEmailTokens'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "purchaseCategory" | "purchase"
+      modelProps: "user" | "purchaseCategory" | "purchase" | "confirmEmailTokens"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -870,6 +886,80 @@ export namespace Prisma {
           }
         }
       }
+      ConfirmEmailTokens: {
+        payload: Prisma.$ConfirmEmailTokensPayload<ExtArgs>
+        fields: Prisma.ConfirmEmailTokensFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConfirmEmailTokensFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConfirmEmailTokensFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+          }
+          findFirst: {
+            args: Prisma.ConfirmEmailTokensFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConfirmEmailTokensFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+          }
+          findMany: {
+            args: Prisma.ConfirmEmailTokensFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>[]
+          }
+          create: {
+            args: Prisma.ConfirmEmailTokensCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+          }
+          createMany: {
+            args: Prisma.ConfirmEmailTokensCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConfirmEmailTokensCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>[]
+          }
+          delete: {
+            args: Prisma.ConfirmEmailTokensDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+          }
+          update: {
+            args: Prisma.ConfirmEmailTokensUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConfirmEmailTokensDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConfirmEmailTokensUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConfirmEmailTokensUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConfirmEmailTokensUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+          }
+          aggregate: {
+            args: Prisma.ConfirmEmailTokensAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConfirmEmailTokens>
+          }
+          groupBy: {
+            args: Prisma.ConfirmEmailTokensGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConfirmEmailTokensGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConfirmEmailTokensCountArgs<ExtArgs>
+            result: $Utils.Optional<ConfirmEmailTokensCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -957,6 +1047,7 @@ export namespace Prisma {
     user?: UserOmit
     purchaseCategory?: PurchaseCategoryOmit
     purchase?: PurchaseOmit
+    confirmEmailTokens?: ConfirmEmailTokensOmit
   }
 
   /* Types for Logging */
@@ -1052,10 +1143,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     purchases: number
+    token: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchases?: boolean | UserCountOutputTypeCountPurchasesArgs
+    token?: boolean | UserCountOutputTypeCountTokenArgs
   }
 
   // Custom InputTypes
@@ -1074,6 +1167,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PurchaseWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConfirmEmailTokensWhereInput
   }
 
 
@@ -1135,22 +1235,25 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: number | null
     email: string | null
-    password: string | null
     createdAt: Date | null
+    password: string | null
+    verified: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number | null
     email: string | null
-    password: string | null
     createdAt: Date | null
+    password: string | null
+    verified: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     email: number
-    password: number
     createdAt: number
+    password: number
+    verified: number
     _all: number
   }
 
@@ -1166,22 +1269,25 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
-    password?: true
     createdAt?: true
+    password?: true
+    verified?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
-    password?: true
     createdAt?: true
+    password?: true
+    verified?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
-    password?: true
     createdAt?: true
+    password?: true
+    verified?: true
     _all?: true
   }
 
@@ -1274,8 +1380,9 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: number
     email: string
-    password: string
     createdAt: Date
+    password: string
+    verified: boolean
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1300,36 +1407,42 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    password?: boolean
     createdAt?: boolean
+    password?: boolean
+    verified?: boolean
     purchases?: boolean | User$purchasesArgs<ExtArgs>
+    token?: boolean | User$tokenArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    password?: boolean
     createdAt?: boolean
+    password?: boolean
+    verified?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    password?: boolean
     createdAt?: boolean
+    password?: boolean
+    verified?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
-    password?: boolean
     createdAt?: boolean
+    password?: boolean
+    verified?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "createdAt" | "password" | "verified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchases?: boolean | User$purchasesArgs<ExtArgs>
+    token?: boolean | User$tokenArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1339,12 +1452,14 @@ export namespace Prisma {
     name: "User"
     objects: {
       purchases: Prisma.$PurchasePayload<ExtArgs>[]
+      token: Prisma.$ConfirmEmailTokensPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       email: string
-      password: string
       createdAt: Date
+      password: string
+      verified: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1740,6 +1855,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     purchases<T extends User$purchasesArgs<ExtArgs> = {}>(args?: Subset<T, User$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    token<T extends User$tokenArgs<ExtArgs> = {}>(args?: Subset<T, User$tokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1771,8 +1887,9 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'Int'>
     readonly email: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly verified: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -2182,6 +2299,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PurchaseScalarFieldEnum | PurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * User.token
+   */
+  export type User$tokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    where?: ConfirmEmailTokensWhereInput
+    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    cursor?: ConfirmEmailTokensWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
   }
 
   /**
@@ -3282,92 +3423,92 @@ export namespace Prisma {
 
   export type PurchaseAvgAggregateOutputType = {
     id: number | null
-    categoryId: number | null
     price: number | null
     createdBy: number | null
+    categoryId: number | null
   }
 
   export type PurchaseSumAggregateOutputType = {
     id: number | null
-    categoryId: number | null
     price: number | null
     createdBy: number | null
+    categoryId: number | null
   }
 
   export type PurchaseMinAggregateOutputType = {
     id: number | null
     name: string | null
-    categoryId: number | null
     price: number | null
     createdBy: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    categoryId: number | null
   }
 
   export type PurchaseMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    categoryId: number | null
     price: number | null
     createdBy: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    categoryId: number | null
   }
 
   export type PurchaseCountAggregateOutputType = {
     id: number
     name: number
-    categoryId: number
     price: number
     createdBy: number
     createdAt: number
     updatedAt: number
+    categoryId: number
     _all: number
   }
 
 
   export type PurchaseAvgAggregateInputType = {
     id?: true
-    categoryId?: true
     price?: true
     createdBy?: true
+    categoryId?: true
   }
 
   export type PurchaseSumAggregateInputType = {
     id?: true
-    categoryId?: true
     price?: true
     createdBy?: true
+    categoryId?: true
   }
 
   export type PurchaseMinAggregateInputType = {
     id?: true
     name?: true
-    categoryId?: true
     price?: true
     createdBy?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
   }
 
   export type PurchaseMaxAggregateInputType = {
     id?: true
     name?: true
-    categoryId?: true
     price?: true
     createdBy?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
   }
 
   export type PurchaseCountAggregateInputType = {
     id?: true
     name?: true
-    categoryId?: true
     price?: true
     createdBy?: true
     createdAt?: true
     updatedAt?: true
+    categoryId?: true
     _all?: true
   }
 
@@ -3460,11 +3601,11 @@ export namespace Prisma {
   export type PurchaseGroupByOutputType = {
     id: number
     name: string
-    categoryId: number
     price: number
     createdBy: number
     createdAt: Date
     updatedAt: Date
+    categoryId: number
     _count: PurchaseCountAggregateOutputType | null
     _avg: PurchaseAvgAggregateOutputType | null
     _sum: PurchaseSumAggregateOutputType | null
@@ -3489,77 +3630,77 @@ export namespace Prisma {
   export type PurchaseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    categoryId?: boolean
     price?: boolean
     createdBy?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    creator?: boolean | UserDefaultArgs<ExtArgs>
+    categoryId?: boolean
     category?: boolean | PurchaseCategoryDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["purchase"]>
 
   export type PurchaseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    categoryId?: boolean
     price?: boolean
     createdBy?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    creator?: boolean | UserDefaultArgs<ExtArgs>
+    categoryId?: boolean
     category?: boolean | PurchaseCategoryDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["purchase"]>
 
   export type PurchaseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    categoryId?: boolean
     price?: boolean
     createdBy?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    creator?: boolean | UserDefaultArgs<ExtArgs>
+    categoryId?: boolean
     category?: boolean | PurchaseCategoryDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["purchase"]>
 
   export type PurchaseSelectScalar = {
     id?: boolean
     name?: boolean
-    categoryId?: boolean
     price?: boolean
     createdBy?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    categoryId?: boolean
   }
 
-  export type PurchaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "categoryId" | "price" | "createdBy" | "createdAt" | "updatedAt", ExtArgs["result"]["purchase"]>
+  export type PurchaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "createdBy" | "createdAt" | "updatedAt" | "categoryId", ExtArgs["result"]["purchase"]>
   export type PurchaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | PurchaseCategoryDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type PurchaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | PurchaseCategoryDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type PurchaseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | PurchaseCategoryDefaultArgs<ExtArgs>
+    creator?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $PurchasePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Purchase"
     objects: {
-      creator: Prisma.$UserPayload<ExtArgs>
       category: Prisma.$PurchaseCategoryPayload<ExtArgs>
+      creator: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      categoryId: number
       price: number
       createdBy: number
       createdAt: Date
       updatedAt: Date
+      categoryId: number
     }, ExtArgs["result"]["purchase"]>
     composites: {}
   }
@@ -3954,8 +4095,8 @@ export namespace Prisma {
    */
   export interface Prisma__PurchaseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creator<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     category<T extends PurchaseCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PurchaseCategoryDefaultArgs<ExtArgs>>): Prisma__PurchaseCategoryClient<$Result.GetResult<Prisma.$PurchaseCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    creator<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3987,11 +4128,11 @@ export namespace Prisma {
   interface PurchaseFieldRefs {
     readonly id: FieldRef<"Purchase", 'Int'>
     readonly name: FieldRef<"Purchase", 'String'>
-    readonly categoryId: FieldRef<"Purchase", 'Int'>
     readonly price: FieldRef<"Purchase", 'Float'>
     readonly createdBy: FieldRef<"Purchase", 'Int'>
     readonly createdAt: FieldRef<"Purchase", 'DateTime'>
     readonly updatedAt: FieldRef<"Purchase", 'DateTime'>
+    readonly categoryId: FieldRef<"Purchase", 'Int'>
   }
     
 
@@ -4407,6 +4548,1059 @@ export namespace Prisma {
 
 
   /**
+   * Model ConfirmEmailTokens
+   */
+
+  export type AggregateConfirmEmailTokens = {
+    _count: ConfirmEmailTokensCountAggregateOutputType | null
+    _avg: ConfirmEmailTokensAvgAggregateOutputType | null
+    _sum: ConfirmEmailTokensSumAggregateOutputType | null
+    _min: ConfirmEmailTokensMinAggregateOutputType | null
+    _max: ConfirmEmailTokensMaxAggregateOutputType | null
+  }
+
+  export type ConfirmEmailTokensAvgAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type ConfirmEmailTokensSumAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type ConfirmEmailTokensMinAggregateOutputType = {
+    userId: number | null
+    token: string | null
+  }
+
+  export type ConfirmEmailTokensMaxAggregateOutputType = {
+    userId: number | null
+    token: string | null
+  }
+
+  export type ConfirmEmailTokensCountAggregateOutputType = {
+    userId: number
+    token: number
+    _all: number
+  }
+
+
+  export type ConfirmEmailTokensAvgAggregateInputType = {
+    userId?: true
+  }
+
+  export type ConfirmEmailTokensSumAggregateInputType = {
+    userId?: true
+  }
+
+  export type ConfirmEmailTokensMinAggregateInputType = {
+    userId?: true
+    token?: true
+  }
+
+  export type ConfirmEmailTokensMaxAggregateInputType = {
+    userId?: true
+    token?: true
+  }
+
+  export type ConfirmEmailTokensCountAggregateInputType = {
+    userId?: true
+    token?: true
+    _all?: true
+  }
+
+  export type ConfirmEmailTokensAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConfirmEmailTokens to aggregate.
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConfirmEmailTokens to fetch.
+     */
+    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConfirmEmailTokensWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConfirmEmailTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConfirmEmailTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConfirmEmailTokens
+    **/
+    _count?: true | ConfirmEmailTokensCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConfirmEmailTokensAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConfirmEmailTokensSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConfirmEmailTokensMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConfirmEmailTokensMaxAggregateInputType
+  }
+
+  export type GetConfirmEmailTokensAggregateType<T extends ConfirmEmailTokensAggregateArgs> = {
+        [P in keyof T & keyof AggregateConfirmEmailTokens]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConfirmEmailTokens[P]>
+      : GetScalarType<T[P], AggregateConfirmEmailTokens[P]>
+  }
+
+
+
+
+  export type ConfirmEmailTokensGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConfirmEmailTokensWhereInput
+    orderBy?: ConfirmEmailTokensOrderByWithAggregationInput | ConfirmEmailTokensOrderByWithAggregationInput[]
+    by: ConfirmEmailTokensScalarFieldEnum[] | ConfirmEmailTokensScalarFieldEnum
+    having?: ConfirmEmailTokensScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConfirmEmailTokensCountAggregateInputType | true
+    _avg?: ConfirmEmailTokensAvgAggregateInputType
+    _sum?: ConfirmEmailTokensSumAggregateInputType
+    _min?: ConfirmEmailTokensMinAggregateInputType
+    _max?: ConfirmEmailTokensMaxAggregateInputType
+  }
+
+  export type ConfirmEmailTokensGroupByOutputType = {
+    userId: number
+    token: string
+    _count: ConfirmEmailTokensCountAggregateOutputType | null
+    _avg: ConfirmEmailTokensAvgAggregateOutputType | null
+    _sum: ConfirmEmailTokensSumAggregateOutputType | null
+    _min: ConfirmEmailTokensMinAggregateOutputType | null
+    _max: ConfirmEmailTokensMaxAggregateOutputType | null
+  }
+
+  type GetConfirmEmailTokensGroupByPayload<T extends ConfirmEmailTokensGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConfirmEmailTokensGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConfirmEmailTokensGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConfirmEmailTokensGroupByOutputType[P]>
+            : GetScalarType<T[P], ConfirmEmailTokensGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConfirmEmailTokensSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    token?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["confirmEmailTokens"]>
+
+  export type ConfirmEmailTokensSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    token?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["confirmEmailTokens"]>
+
+  export type ConfirmEmailTokensSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    token?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["confirmEmailTokens"]>
+
+  export type ConfirmEmailTokensSelectScalar = {
+    userId?: boolean
+    token?: boolean
+  }
+
+  export type ConfirmEmailTokensOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "token", ExtArgs["result"]["confirmEmailTokens"]>
+  export type ConfirmEmailTokensInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ConfirmEmailTokensIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ConfirmEmailTokensIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ConfirmEmailTokensPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConfirmEmailTokens"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: number
+      token: string
+    }, ExtArgs["result"]["confirmEmailTokens"]>
+    composites: {}
+  }
+
+  type ConfirmEmailTokensGetPayload<S extends boolean | null | undefined | ConfirmEmailTokensDefaultArgs> = $Result.GetResult<Prisma.$ConfirmEmailTokensPayload, S>
+
+  type ConfirmEmailTokensCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConfirmEmailTokensFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConfirmEmailTokensCountAggregateInputType | true
+    }
+
+  export interface ConfirmEmailTokensDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConfirmEmailTokens'], meta: { name: 'ConfirmEmailTokens' } }
+    /**
+     * Find zero or one ConfirmEmailTokens that matches the filter.
+     * @param {ConfirmEmailTokensFindUniqueArgs} args - Arguments to find a ConfirmEmailTokens
+     * @example
+     * // Get one ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConfirmEmailTokensFindUniqueArgs>(args: SelectSubset<T, ConfirmEmailTokensFindUniqueArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConfirmEmailTokens that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConfirmEmailTokensFindUniqueOrThrowArgs} args - Arguments to find a ConfirmEmailTokens
+     * @example
+     * // Get one ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConfirmEmailTokensFindUniqueOrThrowArgs>(args: SelectSubset<T, ConfirmEmailTokensFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConfirmEmailTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensFindFirstArgs} args - Arguments to find a ConfirmEmailTokens
+     * @example
+     * // Get one ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConfirmEmailTokensFindFirstArgs>(args?: SelectSubset<T, ConfirmEmailTokensFindFirstArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConfirmEmailTokens that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensFindFirstOrThrowArgs} args - Arguments to find a ConfirmEmailTokens
+     * @example
+     * // Get one ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConfirmEmailTokensFindFirstOrThrowArgs>(args?: SelectSubset<T, ConfirmEmailTokensFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConfirmEmailTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.findMany()
+     * 
+     * // Get first 10 ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const confirmEmailTokensWithUserIdOnly = await prisma.confirmEmailTokens.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends ConfirmEmailTokensFindManyArgs>(args?: SelectSubset<T, ConfirmEmailTokensFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConfirmEmailTokens.
+     * @param {ConfirmEmailTokensCreateArgs} args - Arguments to create a ConfirmEmailTokens.
+     * @example
+     * // Create one ConfirmEmailTokens
+     * const ConfirmEmailTokens = await prisma.confirmEmailTokens.create({
+     *   data: {
+     *     // ... data to create a ConfirmEmailTokens
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConfirmEmailTokensCreateArgs>(args: SelectSubset<T, ConfirmEmailTokensCreateArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConfirmEmailTokens.
+     * @param {ConfirmEmailTokensCreateManyArgs} args - Arguments to create many ConfirmEmailTokens.
+     * @example
+     * // Create many ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConfirmEmailTokensCreateManyArgs>(args?: SelectSubset<T, ConfirmEmailTokensCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConfirmEmailTokens and returns the data saved in the database.
+     * @param {ConfirmEmailTokensCreateManyAndReturnArgs} args - Arguments to create many ConfirmEmailTokens.
+     * @example
+     * // Create many ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConfirmEmailTokens and only return the `userId`
+     * const confirmEmailTokensWithUserIdOnly = await prisma.confirmEmailTokens.createManyAndReturn({
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConfirmEmailTokensCreateManyAndReturnArgs>(args?: SelectSubset<T, ConfirmEmailTokensCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConfirmEmailTokens.
+     * @param {ConfirmEmailTokensDeleteArgs} args - Arguments to delete one ConfirmEmailTokens.
+     * @example
+     * // Delete one ConfirmEmailTokens
+     * const ConfirmEmailTokens = await prisma.confirmEmailTokens.delete({
+     *   where: {
+     *     // ... filter to delete one ConfirmEmailTokens
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConfirmEmailTokensDeleteArgs>(args: SelectSubset<T, ConfirmEmailTokensDeleteArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConfirmEmailTokens.
+     * @param {ConfirmEmailTokensUpdateArgs} args - Arguments to update one ConfirmEmailTokens.
+     * @example
+     * // Update one ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConfirmEmailTokensUpdateArgs>(args: SelectSubset<T, ConfirmEmailTokensUpdateArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConfirmEmailTokens.
+     * @param {ConfirmEmailTokensDeleteManyArgs} args - Arguments to filter ConfirmEmailTokens to delete.
+     * @example
+     * // Delete a few ConfirmEmailTokens
+     * const { count } = await prisma.confirmEmailTokens.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConfirmEmailTokensDeleteManyArgs>(args?: SelectSubset<T, ConfirmEmailTokensDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConfirmEmailTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConfirmEmailTokensUpdateManyArgs>(args: SelectSubset<T, ConfirmEmailTokensUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConfirmEmailTokens and returns the data updated in the database.
+     * @param {ConfirmEmailTokensUpdateManyAndReturnArgs} args - Arguments to update many ConfirmEmailTokens.
+     * @example
+     * // Update many ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConfirmEmailTokens and only return the `userId`
+     * const confirmEmailTokensWithUserIdOnly = await prisma.confirmEmailTokens.updateManyAndReturn({
+     *   select: { userId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConfirmEmailTokensUpdateManyAndReturnArgs>(args: SelectSubset<T, ConfirmEmailTokensUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConfirmEmailTokens.
+     * @param {ConfirmEmailTokensUpsertArgs} args - Arguments to update or create a ConfirmEmailTokens.
+     * @example
+     * // Update or create a ConfirmEmailTokens
+     * const confirmEmailTokens = await prisma.confirmEmailTokens.upsert({
+     *   create: {
+     *     // ... data to create a ConfirmEmailTokens
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConfirmEmailTokens we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConfirmEmailTokensUpsertArgs>(args: SelectSubset<T, ConfirmEmailTokensUpsertArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConfirmEmailTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensCountArgs} args - Arguments to filter ConfirmEmailTokens to count.
+     * @example
+     * // Count the number of ConfirmEmailTokens
+     * const count = await prisma.confirmEmailTokens.count({
+     *   where: {
+     *     // ... the filter for the ConfirmEmailTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConfirmEmailTokensCountArgs>(
+      args?: Subset<T, ConfirmEmailTokensCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConfirmEmailTokensCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConfirmEmailTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConfirmEmailTokensAggregateArgs>(args: Subset<T, ConfirmEmailTokensAggregateArgs>): Prisma.PrismaPromise<GetConfirmEmailTokensAggregateType<T>>
+
+    /**
+     * Group by ConfirmEmailTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConfirmEmailTokensGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConfirmEmailTokensGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConfirmEmailTokensGroupByArgs['orderBy'] }
+        : { orderBy?: ConfirmEmailTokensGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConfirmEmailTokensGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConfirmEmailTokensGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConfirmEmailTokens model
+   */
+  readonly fields: ConfirmEmailTokensFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConfirmEmailTokens.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConfirmEmailTokensClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConfirmEmailTokens model
+   */
+  interface ConfirmEmailTokensFieldRefs {
+    readonly userId: FieldRef<"ConfirmEmailTokens", 'Int'>
+    readonly token: FieldRef<"ConfirmEmailTokens", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConfirmEmailTokens findUnique
+   */
+  export type ConfirmEmailTokensFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * Filter, which ConfirmEmailTokens to fetch.
+     */
+    where: ConfirmEmailTokensWhereUniqueInput
+  }
+
+  /**
+   * ConfirmEmailTokens findUniqueOrThrow
+   */
+  export type ConfirmEmailTokensFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * Filter, which ConfirmEmailTokens to fetch.
+     */
+    where: ConfirmEmailTokensWhereUniqueInput
+  }
+
+  /**
+   * ConfirmEmailTokens findFirst
+   */
+  export type ConfirmEmailTokensFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * Filter, which ConfirmEmailTokens to fetch.
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConfirmEmailTokens to fetch.
+     */
+    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConfirmEmailTokens.
+     */
+    cursor?: ConfirmEmailTokensWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConfirmEmailTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConfirmEmailTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConfirmEmailTokens.
+     */
+    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+  }
+
+  /**
+   * ConfirmEmailTokens findFirstOrThrow
+   */
+  export type ConfirmEmailTokensFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * Filter, which ConfirmEmailTokens to fetch.
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConfirmEmailTokens to fetch.
+     */
+    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConfirmEmailTokens.
+     */
+    cursor?: ConfirmEmailTokensWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConfirmEmailTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConfirmEmailTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConfirmEmailTokens.
+     */
+    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+  }
+
+  /**
+   * ConfirmEmailTokens findMany
+   */
+  export type ConfirmEmailTokensFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * Filter, which ConfirmEmailTokens to fetch.
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConfirmEmailTokens to fetch.
+     */
+    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConfirmEmailTokens.
+     */
+    cursor?: ConfirmEmailTokensWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConfirmEmailTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConfirmEmailTokens.
+     */
+    skip?: number
+    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+  }
+
+  /**
+   * ConfirmEmailTokens create
+   */
+  export type ConfirmEmailTokensCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConfirmEmailTokens.
+     */
+    data: XOR<ConfirmEmailTokensCreateInput, ConfirmEmailTokensUncheckedCreateInput>
+  }
+
+  /**
+   * ConfirmEmailTokens createMany
+   */
+  export type ConfirmEmailTokensCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConfirmEmailTokens.
+     */
+    data: ConfirmEmailTokensCreateManyInput | ConfirmEmailTokensCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConfirmEmailTokens createManyAndReturn
+   */
+  export type ConfirmEmailTokensCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConfirmEmailTokens.
+     */
+    data: ConfirmEmailTokensCreateManyInput | ConfirmEmailTokensCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConfirmEmailTokens update
+   */
+  export type ConfirmEmailTokensUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConfirmEmailTokens.
+     */
+    data: XOR<ConfirmEmailTokensUpdateInput, ConfirmEmailTokensUncheckedUpdateInput>
+    /**
+     * Choose, which ConfirmEmailTokens to update.
+     */
+    where: ConfirmEmailTokensWhereUniqueInput
+  }
+
+  /**
+   * ConfirmEmailTokens updateMany
+   */
+  export type ConfirmEmailTokensUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConfirmEmailTokens.
+     */
+    data: XOR<ConfirmEmailTokensUpdateManyMutationInput, ConfirmEmailTokensUncheckedUpdateManyInput>
+    /**
+     * Filter which ConfirmEmailTokens to update
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * Limit how many ConfirmEmailTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConfirmEmailTokens updateManyAndReturn
+   */
+  export type ConfirmEmailTokensUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * The data used to update ConfirmEmailTokens.
+     */
+    data: XOR<ConfirmEmailTokensUpdateManyMutationInput, ConfirmEmailTokensUncheckedUpdateManyInput>
+    /**
+     * Filter which ConfirmEmailTokens to update
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * Limit how many ConfirmEmailTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConfirmEmailTokens upsert
+   */
+  export type ConfirmEmailTokensUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConfirmEmailTokens to update in case it exists.
+     */
+    where: ConfirmEmailTokensWhereUniqueInput
+    /**
+     * In case the ConfirmEmailTokens found by the `where` argument doesn't exist, create a new ConfirmEmailTokens with this data.
+     */
+    create: XOR<ConfirmEmailTokensCreateInput, ConfirmEmailTokensUncheckedCreateInput>
+    /**
+     * In case the ConfirmEmailTokens was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConfirmEmailTokensUpdateInput, ConfirmEmailTokensUncheckedUpdateInput>
+  }
+
+  /**
+   * ConfirmEmailTokens delete
+   */
+  export type ConfirmEmailTokensDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    /**
+     * Filter which ConfirmEmailTokens to delete.
+     */
+    where: ConfirmEmailTokensWhereUniqueInput
+  }
+
+  /**
+   * ConfirmEmailTokens deleteMany
+   */
+  export type ConfirmEmailTokensDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConfirmEmailTokens to delete
+     */
+    where?: ConfirmEmailTokensWhereInput
+    /**
+     * Limit how many ConfirmEmailTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConfirmEmailTokens without action
+   */
+  export type ConfirmEmailTokensDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConfirmEmailTokens
+     */
+    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConfirmEmailTokens
+     */
+    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4423,8 +5617,9 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    createdAt: 'createdAt',
     password: 'password',
-    createdAt: 'createdAt'
+    verified: 'verified'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4441,14 +5636,22 @@ export namespace Prisma {
   export const PurchaseScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    categoryId: 'categoryId',
     price: 'price',
     createdBy: 'createdBy',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    categoryId: 'categoryId'
   };
 
   export type PurchaseScalarFieldEnum = (typeof PurchaseScalarFieldEnum)[keyof typeof PurchaseScalarFieldEnum]
+
+
+  export const ConfirmEmailTokensScalarFieldEnum: {
+    userId: 'userId',
+    token: 'token'
+  };
+
+  export type ConfirmEmailTokensScalarFieldEnum = (typeof ConfirmEmailTokensScalarFieldEnum)[keyof typeof ConfirmEmailTokensScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4515,6 +5718,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -4537,17 +5747,21 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
     email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    password?: StringFilter<"User"> | string
+    verified?: BoolFilter<"User"> | boolean
     purchases?: PurchaseListRelationFilter
+    token?: ConfirmEmailTokensListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
+    password?: SortOrder
+    verified?: SortOrder
     purchases?: PurchaseOrderByRelationAggregateInput
+    token?: ConfirmEmailTokensOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4556,16 +5770,19 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    password?: StringFilter<"User"> | string
+    verified?: BoolFilter<"User"> | boolean
     purchases?: PurchaseListRelationFilter
+    token?: ConfirmEmailTokensListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
+    password?: SortOrder
+    verified?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4579,8 +5796,9 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
     email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    verified?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type PurchaseCategoryWhereInput = {
@@ -4631,25 +5849,25 @@ export namespace Prisma {
     NOT?: PurchaseWhereInput | PurchaseWhereInput[]
     id?: IntFilter<"Purchase"> | number
     name?: StringFilter<"Purchase"> | string
-    categoryId?: IntFilter<"Purchase"> | number
     price?: FloatFilter<"Purchase"> | number
     createdBy?: IntFilter<"Purchase"> | number
     createdAt?: DateTimeFilter<"Purchase"> | Date | string
     updatedAt?: DateTimeFilter<"Purchase"> | Date | string
-    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
+    categoryId?: IntFilter<"Purchase"> | number
     category?: XOR<PurchaseCategoryScalarRelationFilter, PurchaseCategoryWhereInput>
+    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type PurchaseOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    creator?: UserOrderByWithRelationInput
+    categoryId?: SortOrder
     category?: PurchaseCategoryOrderByWithRelationInput
+    creator?: UserOrderByWithRelationInput
   }
 
   export type PurchaseWhereUniqueInput = Prisma.AtLeast<{
@@ -4658,23 +5876,23 @@ export namespace Prisma {
     OR?: PurchaseWhereInput[]
     NOT?: PurchaseWhereInput | PurchaseWhereInput[]
     name?: StringFilter<"Purchase"> | string
-    categoryId?: IntFilter<"Purchase"> | number
     price?: FloatFilter<"Purchase"> | number
     createdBy?: IntFilter<"Purchase"> | number
     createdAt?: DateTimeFilter<"Purchase"> | Date | string
     updatedAt?: DateTimeFilter<"Purchase"> | Date | string
-    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
+    categoryId?: IntFilter<"Purchase"> | number
     category?: XOR<PurchaseCategoryScalarRelationFilter, PurchaseCategoryWhereInput>
+    creator?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type PurchaseOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
     _count?: PurchaseCountOrderByAggregateInput
     _avg?: PurchaseAvgOrderByAggregateInput
     _max?: PurchaseMaxOrderByAggregateInput
@@ -4688,61 +5906,114 @@ export namespace Prisma {
     NOT?: PurchaseScalarWhereWithAggregatesInput | PurchaseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Purchase"> | number
     name?: StringWithAggregatesFilter<"Purchase"> | string
-    categoryId?: IntWithAggregatesFilter<"Purchase"> | number
     price?: FloatWithAggregatesFilter<"Purchase"> | number
     createdBy?: IntWithAggregatesFilter<"Purchase"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Purchase"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Purchase"> | Date | string
+    categoryId?: IntWithAggregatesFilter<"Purchase"> | number
+  }
+
+  export type ConfirmEmailTokensWhereInput = {
+    AND?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
+    OR?: ConfirmEmailTokensWhereInput[]
+    NOT?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
+    userId?: IntFilter<"ConfirmEmailTokens"> | number
+    token?: StringFilter<"ConfirmEmailTokens"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ConfirmEmailTokensOrderByWithRelationInput = {
+    userId?: SortOrder
+    token?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ConfirmEmailTokensWhereUniqueInput = Prisma.AtLeast<{
+    userId?: number
+    token?: string
+    AND?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
+    OR?: ConfirmEmailTokensWhereInput[]
+    NOT?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "userId" | "token">
+
+  export type ConfirmEmailTokensOrderByWithAggregationInput = {
+    userId?: SortOrder
+    token?: SortOrder
+    _count?: ConfirmEmailTokensCountOrderByAggregateInput
+    _avg?: ConfirmEmailTokensAvgOrderByAggregateInput
+    _max?: ConfirmEmailTokensMaxOrderByAggregateInput
+    _min?: ConfirmEmailTokensMinOrderByAggregateInput
+    _sum?: ConfirmEmailTokensSumOrderByAggregateInput
+  }
+
+  export type ConfirmEmailTokensScalarWhereWithAggregatesInput = {
+    AND?: ConfirmEmailTokensScalarWhereWithAggregatesInput | ConfirmEmailTokensScalarWhereWithAggregatesInput[]
+    OR?: ConfirmEmailTokensScalarWhereWithAggregatesInput[]
+    NOT?: ConfirmEmailTokensScalarWhereWithAggregatesInput | ConfirmEmailTokensScalarWhereWithAggregatesInput[]
+    userId?: IntWithAggregatesFilter<"ConfirmEmailTokens"> | number
+    token?: StringWithAggregatesFilter<"ConfirmEmailTokens"> | string
   }
 
   export type UserCreateInput = {
     email: string
-    password: string
     createdAt?: Date | string
+    password: string
+    verified?: boolean
     purchases?: PurchaseCreateNestedManyWithoutCreatorInput
+    token?: ConfirmEmailTokensCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
     email: string
-    password: string
     createdAt?: Date | string
+    password: string
+    verified?: boolean
     purchases?: PurchaseUncheckedCreateNestedManyWithoutCreatorInput
+    token?: ConfirmEmailTokensUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
     purchases?: PurchaseUpdateManyWithoutCreatorNestedInput
+    token?: ConfirmEmailTokensUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
     purchases?: PurchaseUncheckedUpdateManyWithoutCreatorNestedInput
+    token?: ConfirmEmailTokensUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: number
     email: string
-    password: string
     createdAt?: Date | string
+    password: string
+    verified?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PurchaseCategoryCreateInput = {
@@ -4786,18 +6057,18 @@ export namespace Prisma {
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    creator: UserCreateNestedOneWithoutPurchasesInput
     category: PurchaseCategoryCreateNestedOneWithoutPurchasesInput
+    creator: UserCreateNestedOneWithoutPurchasesInput
   }
 
   export type PurchaseUncheckedCreateInput = {
     id?: number
     name: string
-    categoryId: number
     price: number
     createdBy: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId: number
   }
 
   export type PurchaseUpdateInput = {
@@ -4805,28 +6076,28 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creator?: UserUpdateOneRequiredWithoutPurchasesNestedInput
     category?: PurchaseCategoryUpdateOneRequiredWithoutPurchasesNestedInput
+    creator?: UserUpdateOneRequiredWithoutPurchasesNestedInput
   }
 
   export type PurchaseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    categoryId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdBy?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PurchaseCreateManyInput = {
     id?: number
     name: string
-    categoryId: number
     price: number
     createdBy: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId: number
   }
 
   export type PurchaseUpdateManyMutationInput = {
@@ -4839,11 +6110,45 @@ export namespace Prisma {
   export type PurchaseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    categoryId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdBy?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConfirmEmailTokensCreateInput = {
+    token: string
+    user: UserCreateNestedOneWithoutTokenInput
+  }
+
+  export type ConfirmEmailTokensUncheckedCreateInput = {
+    userId: number
+    token: string
+  }
+
+  export type ConfirmEmailTokensUpdateInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutTokenNestedInput
+  }
+
+  export type ConfirmEmailTokensUncheckedUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConfirmEmailTokensCreateManyInput = {
+    userId: number
+    token: string
+  }
+
+  export type ConfirmEmailTokensUpdateManyMutationInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConfirmEmailTokensUncheckedUpdateManyInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4883,21 +6188,37 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type PurchaseListRelationFilter = {
     every?: PurchaseWhereInput
     some?: PurchaseWhereInput
     none?: PurchaseWhereInput
   }
 
+  export type ConfirmEmailTokensListRelationFilter = {
+    every?: ConfirmEmailTokensWhereInput
+    some?: ConfirmEmailTokensWhereInput
+    none?: ConfirmEmailTokensWhereInput
+  }
+
   export type PurchaseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConfirmEmailTokensOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
+    password?: SortOrder
+    verified?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -4907,15 +6228,17 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
+    password?: SortOrder
+    verified?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
+    password?: SortOrder
+    verified?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -4970,6 +6293,14 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type PurchaseCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -5004,58 +6335,58 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type PurchaseCategoryScalarRelationFilter = {
     is?: PurchaseCategoryWhereInput
     isNot?: PurchaseCategoryWhereInput
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
   export type PurchaseCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type PurchaseAvgOrderByAggregateInput = {
     id?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type PurchaseMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type PurchaseMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type PurchaseSumOrderByAggregateInput = {
     id?: SortOrder
-    categoryId?: SortOrder
     price?: SortOrder
     createdBy?: SortOrder
+    categoryId?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -5074,11 +6405,41 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type ConfirmEmailTokensCountOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type ConfirmEmailTokensAvgOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
+  export type ConfirmEmailTokensMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type ConfirmEmailTokensMinOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type ConfirmEmailTokensSumOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
   export type PurchaseCreateNestedManyWithoutCreatorInput = {
     create?: XOR<PurchaseCreateWithoutCreatorInput, PurchaseUncheckedCreateWithoutCreatorInput> | PurchaseCreateWithoutCreatorInput[] | PurchaseUncheckedCreateWithoutCreatorInput[]
     connectOrCreate?: PurchaseCreateOrConnectWithoutCreatorInput | PurchaseCreateOrConnectWithoutCreatorInput[]
     createMany?: PurchaseCreateManyCreatorInputEnvelope
     connect?: PurchaseWhereUniqueInput | PurchaseWhereUniqueInput[]
+  }
+
+  export type ConfirmEmailTokensCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
+    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
+    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
   }
 
   export type PurchaseUncheckedCreateNestedManyWithoutCreatorInput = {
@@ -5088,12 +6449,23 @@ export namespace Prisma {
     connect?: PurchaseWhereUniqueInput | PurchaseWhereUniqueInput[]
   }
 
+  export type ConfirmEmailTokensUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
+    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
+    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type PurchaseUpdateManyWithoutCreatorNestedInput = {
@@ -5108,6 +6480,20 @@ export namespace Prisma {
     update?: PurchaseUpdateWithWhereUniqueWithoutCreatorInput | PurchaseUpdateWithWhereUniqueWithoutCreatorInput[]
     updateMany?: PurchaseUpdateManyWithWhereWithoutCreatorInput | PurchaseUpdateManyWithWhereWithoutCreatorInput[]
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
+  }
+
+  export type ConfirmEmailTokensUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
+    upsert?: ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
+    set?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    disconnect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    delete?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    update?: ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput | ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -5130,6 +6516,20 @@ export namespace Prisma {
     update?: PurchaseUpdateWithWhereUniqueWithoutCreatorInput | PurchaseUpdateWithWhereUniqueWithoutCreatorInput[]
     updateMany?: PurchaseUpdateManyWithWhereWithoutCreatorInput | PurchaseUpdateManyWithWhereWithoutCreatorInput[]
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
+  }
+
+  export type ConfirmEmailTokensUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
+    upsert?: ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
+    set?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    disconnect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    delete?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+    update?: ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput | ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
   }
 
   export type PurchaseCreateNestedManyWithoutCategoryInput = {
@@ -5174,16 +6574,16 @@ export namespace Prisma {
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutPurchasesInput = {
-    create?: XOR<UserCreateWithoutPurchasesInput, UserUncheckedCreateWithoutPurchasesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPurchasesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type PurchaseCategoryCreateNestedOneWithoutPurchasesInput = {
     create?: XOR<PurchaseCategoryCreateWithoutPurchasesInput, PurchaseCategoryUncheckedCreateWithoutPurchasesInput>
     connectOrCreate?: PurchaseCategoryCreateOrConnectWithoutPurchasesInput
     connect?: PurchaseCategoryWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutPurchasesInput = {
+    create?: XOR<UserCreateWithoutPurchasesInput, UserUncheckedCreateWithoutPurchasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPurchasesInput
+    connect?: UserWhereUniqueInput
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -5194,6 +6594,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type PurchaseCategoryUpdateOneRequiredWithoutPurchasesNestedInput = {
+    create?: XOR<PurchaseCategoryCreateWithoutPurchasesInput, PurchaseCategoryUncheckedCreateWithoutPurchasesInput>
+    connectOrCreate?: PurchaseCategoryCreateOrConnectWithoutPurchasesInput
+    upsert?: PurchaseCategoryUpsertWithoutPurchasesInput
+    connect?: PurchaseCategoryWhereUniqueInput
+    update?: XOR<XOR<PurchaseCategoryUpdateToOneWithWhereWithoutPurchasesInput, PurchaseCategoryUpdateWithoutPurchasesInput>, PurchaseCategoryUncheckedUpdateWithoutPurchasesInput>
+  }
+
   export type UserUpdateOneRequiredWithoutPurchasesNestedInput = {
     create?: XOR<UserCreateWithoutPurchasesInput, UserUncheckedCreateWithoutPurchasesInput>
     connectOrCreate?: UserCreateOrConnectWithoutPurchasesInput
@@ -5202,12 +6610,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPurchasesInput, UserUpdateWithoutPurchasesInput>, UserUncheckedUpdateWithoutPurchasesInput>
   }
 
-  export type PurchaseCategoryUpdateOneRequiredWithoutPurchasesNestedInput = {
-    create?: XOR<PurchaseCategoryCreateWithoutPurchasesInput, PurchaseCategoryUncheckedCreateWithoutPurchasesInput>
-    connectOrCreate?: PurchaseCategoryCreateOrConnectWithoutPurchasesInput
-    upsert?: PurchaseCategoryUpsertWithoutPurchasesInput
-    connect?: PurchaseCategoryWhereUniqueInput
-    update?: XOR<XOR<PurchaseCategoryUpdateToOneWithWhereWithoutPurchasesInput, PurchaseCategoryUpdateWithoutPurchasesInput>, PurchaseCategoryUncheckedUpdateWithoutPurchasesInput>
+  export type UserCreateNestedOneWithoutTokenInput = {
+    create?: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTokenInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutTokenNestedInput = {
+    create?: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTokenInput
+    upsert?: UserUpsertWithoutTokenInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTokenInput, UserUpdateWithoutTokenInput>, UserUncheckedUpdateWithoutTokenInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5244,6 +6658,11 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -5304,6 +6723,14 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -5331,10 +6758,10 @@ export namespace Prisma {
   export type PurchaseUncheckedCreateWithoutCreatorInput = {
     id?: number
     name: string
-    categoryId: number
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId: number
   }
 
   export type PurchaseCreateOrConnectWithoutCreatorInput = {
@@ -5344,6 +6771,24 @@ export namespace Prisma {
 
   export type PurchaseCreateManyCreatorInputEnvelope = {
     data: PurchaseCreateManyCreatorInput | PurchaseCreateManyCreatorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConfirmEmailTokensCreateWithoutUserInput = {
+    token: string
+  }
+
+  export type ConfirmEmailTokensUncheckedCreateWithoutUserInput = {
+    token: string
+  }
+
+  export type ConfirmEmailTokensCreateOrConnectWithoutUserInput = {
+    where: ConfirmEmailTokensWhereUniqueInput
+    create: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConfirmEmailTokensCreateManyUserInputEnvelope = {
+    data: ConfirmEmailTokensCreateManyUserInput | ConfirmEmailTokensCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -5369,11 +6814,35 @@ export namespace Prisma {
     NOT?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
     id?: IntFilter<"Purchase"> | number
     name?: StringFilter<"Purchase"> | string
-    categoryId?: IntFilter<"Purchase"> | number
     price?: FloatFilter<"Purchase"> | number
     createdBy?: IntFilter<"Purchase"> | number
     createdAt?: DateTimeFilter<"Purchase"> | Date | string
     updatedAt?: DateTimeFilter<"Purchase"> | Date | string
+    categoryId?: IntFilter<"Purchase"> | number
+  }
+
+  export type ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConfirmEmailTokensWhereUniqueInput
+    update: XOR<ConfirmEmailTokensUpdateWithoutUserInput, ConfirmEmailTokensUncheckedUpdateWithoutUserInput>
+    create: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConfirmEmailTokensWhereUniqueInput
+    data: XOR<ConfirmEmailTokensUpdateWithoutUserInput, ConfirmEmailTokensUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput = {
+    where: ConfirmEmailTokensScalarWhereInput
+    data: XOR<ConfirmEmailTokensUpdateManyMutationInput, ConfirmEmailTokensUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConfirmEmailTokensScalarWhereInput = {
+    AND?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
+    OR?: ConfirmEmailTokensScalarWhereInput[]
+    NOT?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
+    userId?: IntFilter<"ConfirmEmailTokens"> | number
+    token?: StringFilter<"ConfirmEmailTokens"> | string
   }
 
   export type PurchaseCreateWithoutCategoryInput = {
@@ -5419,24 +6888,6 @@ export namespace Prisma {
     data: XOR<PurchaseUpdateManyMutationInput, PurchaseUncheckedUpdateManyWithoutCategoryInput>
   }
 
-  export type UserCreateWithoutPurchasesInput = {
-    email: string
-    password: string
-    createdAt?: Date | string
-  }
-
-  export type UserUncheckedCreateWithoutPurchasesInput = {
-    id?: number
-    email: string
-    password: string
-    createdAt?: Date | string
-  }
-
-  export type UserCreateOrConnectWithoutPurchasesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPurchasesInput, UserUncheckedCreateWithoutPurchasesInput>
-  }
-
   export type PurchaseCategoryCreateWithoutPurchasesInput = {
     name: string
   }
@@ -5451,28 +6902,26 @@ export namespace Prisma {
     create: XOR<PurchaseCategoryCreateWithoutPurchasesInput, PurchaseCategoryUncheckedCreateWithoutPurchasesInput>
   }
 
-  export type UserUpsertWithoutPurchasesInput = {
-    update: XOR<UserUpdateWithoutPurchasesInput, UserUncheckedUpdateWithoutPurchasesInput>
+  export type UserCreateWithoutPurchasesInput = {
+    email: string
+    createdAt?: Date | string
+    password: string
+    verified?: boolean
+    token?: ConfirmEmailTokensCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPurchasesInput = {
+    id?: number
+    email: string
+    createdAt?: Date | string
+    password: string
+    verified?: boolean
+    token?: ConfirmEmailTokensUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPurchasesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPurchasesInput, UserUncheckedCreateWithoutPurchasesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPurchasesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPurchasesInput, UserUncheckedUpdateWithoutPurchasesInput>
-  }
-
-  export type UserUpdateWithoutPurchasesInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserUncheckedUpdateWithoutPurchasesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PurchaseCategoryUpsertWithoutPurchasesInput = {
@@ -5495,13 +6944,95 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type UserUpsertWithoutPurchasesInput = {
+    update: XOR<UserUpdateWithoutPurchasesInput, UserUncheckedUpdateWithoutPurchasesInput>
+    create: XOR<UserCreateWithoutPurchasesInput, UserUncheckedCreateWithoutPurchasesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPurchasesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPurchasesInput, UserUncheckedUpdateWithoutPurchasesInput>
+  }
+
+  export type UserUpdateWithoutPurchasesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    token?: ConfirmEmailTokensUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPurchasesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    token?: ConfirmEmailTokensUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutTokenInput = {
+    email: string
+    createdAt?: Date | string
+    password: string
+    verified?: boolean
+    purchases?: PurchaseCreateNestedManyWithoutCreatorInput
+  }
+
+  export type UserUncheckedCreateWithoutTokenInput = {
+    id?: number
+    email: string
+    createdAt?: Date | string
+    password: string
+    verified?: boolean
+    purchases?: PurchaseUncheckedCreateNestedManyWithoutCreatorInput
+  }
+
+  export type UserCreateOrConnectWithoutTokenInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
+  }
+
+  export type UserUpsertWithoutTokenInput = {
+    update: XOR<UserUpdateWithoutTokenInput, UserUncheckedUpdateWithoutTokenInput>
+    create: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTokenInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTokenInput, UserUncheckedUpdateWithoutTokenInput>
+  }
+
+  export type UserUpdateWithoutTokenInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    purchases?: PurchaseUpdateManyWithoutCreatorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTokenInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    purchases?: PurchaseUncheckedUpdateManyWithoutCreatorNestedInput
+  }
+
   export type PurchaseCreateManyCreatorInput = {
     id?: number
     name: string
-    categoryId: number
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    categoryId: number
+  }
+
+  export type ConfirmEmailTokensCreateManyUserInput = {
+    token: string
   }
 
   export type PurchaseUpdateWithoutCreatorInput = {
@@ -5515,19 +7046,31 @@ export namespace Prisma {
   export type PurchaseUncheckedUpdateWithoutCreatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    categoryId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PurchaseUncheckedUpdateManyWithoutCreatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    categoryId?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConfirmEmailTokensUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConfirmEmailTokensUncheckedUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConfirmEmailTokensUncheckedUpdateManyWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
   }
 
   export type PurchaseCreateManyCategoryInput = {
