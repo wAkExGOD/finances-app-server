@@ -18,18 +18,20 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  login(@Request() req: RequestWithUser) {
-    return this.authService.login(req.user);
+  async login(@Request() req: RequestWithUser) {
+    const payloadWithToken = await this.authService.login(req.user);
+
+    return payloadWithToken;
   }
 
   @Post('register')
-  register(@Body() registerBody: CreateUserDto) {
-    return this.authService.register(registerBody);
+  async register(@Body() registerBody: CreateUserDto) {
+    return await this.authService.register(registerBody);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req: RequestWithUser) {
-    return req.user;
+  async getProfile(@Request() req: RequestWithUser) {
+    return await this.authService.getProfileByEmail(req.user.email);
   }
 }

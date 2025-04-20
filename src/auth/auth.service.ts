@@ -27,11 +27,12 @@ export class AuthService {
     return user;
   }
 
-  login(user: User) {
+  async login(user: User) {
     const payload = { email: user.email, id: +user.id };
+    const userInfo = await this.getProfileByEmail(user.email);
 
     return {
-      user: payload,
+      user: userInfo,
       access_token: this.jwtService.sign(payload),
     };
   }
@@ -47,9 +48,22 @@ export class AuthService {
       password: await argon2.hash(user.password),
     });
 
-    return this.login({
+    return await this.login({
       ...createdUser,
       id: `${createdUser.id}`,
     });
+  }
+
+  async getProfileByEmail(email: User['email']) {
+    const userInfo = await this.usersService.findOneByEmail(email);
+    if (!userInfo) {
+      throw new BadRequestException("Can't find user");
+    }
+
+    return {
+      id: userInfo.id,
+      email: userInfo.email,
+      createdAt: userInfo.createdAt,
+    };
   }
 }

@@ -10,6 +10,7 @@ export class PurchasesService {
   async getAll(userId: number) {
     return this.prisma.purchase.findMany({
       where: { createdBy: userId },
+      include: { category: true },
     });
   }
 
