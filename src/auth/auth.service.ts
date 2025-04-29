@@ -107,7 +107,6 @@ export class AuthService {
   }
 
   async confirmEmail(token: string, res: Response) {
-    console.log({ token });
     const userToken = await this.prisma.confirmEmailTokens.findUnique({
       where: {
         token: token,

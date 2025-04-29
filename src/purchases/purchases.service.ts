@@ -7,11 +7,40 @@ import { PrismaService } from 'src/prisma.service';
 export class PurchasesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getAll(userId: number) {
-    return this.prisma.purchase.findMany({
-      where: { createdBy: userId },
+  async getAll(
+    userId: number,
+    filter: string,
+    sortBy: string,
+    order: 'asc' | 'desc',
+  ) {
+    const purchases = await this.prisma.purchase.findMany({
+      where: {
+        createdBy: userId,
+        name: {
+          contains: filter,
+          mode: 'insensitive',
+        },
+      },
+      include: { category: true },
+      orderBy: {
+        [sortBy]: order,
+      },
+    });
+
+    return purchases;
+  }
+
+  async getOne(userId: number, id: number) {
+    const purchase = await this.prisma.purchase.findUnique({
+      where: { createdBy: userId, id },
       include: { category: true },
     });
+
+    if (!purchase) {
+      throw new NotFoundException('Purchase not found');
+    }
+
+    return purchase;
   }
 
   async create(userId: number, createPurchaseDto: CreatePurchaseDto) {
@@ -28,6 +57,7 @@ export class PurchasesService {
         ...createPurchaseDto,
         createdBy: userId,
       },
+      include: { category: true },
     });
   }
 
@@ -61,14 +91,13 @@ export class PurchasesService {
       throw new NotFoundException('Purchase not found');
     }
 
-    await this.prisma.purchase.update({
+    return await this.prisma.purchase.update({
       where: {
         id: purchaseId,
         createdBy: userId,
       },
       data: updatePurchaseDto,
+      include: { category: true },
     });
-
-    return { success: true };
   }
 }

@@ -10,12 +10,14 @@ import {
   ValidationPipe,
   UsePipes,
   Patch,
+  Query,
 } from '@nestjs/common';
 import { PurchasesService } from './purchases.service';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { RequestWithUser } from 'src/types';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { FindOneParams } from './dto/find-one-params.dto';
 
 @Controller('purchases')
 export class PurchasesController {
@@ -23,8 +25,22 @@ export class PurchasesController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getAll(@Request() req: RequestWithUser) {
-    return this.purchasesService.getAll(+req.user.id);
+  async getAll(
+    @Request() req: RequestWithUser,
+    @Query('filter') filter: string,
+    @Query('sortBy') sortBy: 'price' | 'createdAt' = 'createdAt',
+    @Query('order') order: 'asc' | 'desc' = 'desc',
+  ) {
+    return this.purchasesService.getAll(+req.user.id, filter, sortBy, order);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  async getOne(
+    @Request() req: RequestWithUser,
+    @Param() params: FindOneParams,
+  ) {
+    return this.purchasesService.getOne(+req.user.id, +params.id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -39,8 +55,11 @@ export class PurchasesController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async remove(@Request() req: RequestWithUser, @Param('id') id: number) {
-    return this.purchasesService.remove(+req.user.id, id);
+  async remove(
+    @Request() req: RequestWithUser,
+    @Param() params: FindOneParams,
+  ) {
+    return this.purchasesService.remove(+req.user.id, +params.id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -48,9 +67,13 @@ export class PurchasesController {
   @Patch(':id')
   async update(
     @Request() req: RequestWithUser,
-    @Param('id') id: number,
+    @Param() params: FindOneParams,
     @Body() updatePurchaseDto: UpdatePurchaseDto,
   ) {
-    return this.purchasesService.update(+req.user.id, +id, updatePurchaseDto);
+    return this.purchasesService.update(
+      +req.user.id,
+      +params.id,
+      updatePurchaseDto,
+    );
   }
 }

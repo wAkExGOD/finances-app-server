@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { AuthModule } from './auth/auth.module';
 import { PurchasesModule } from './purchases/purchases.module';
+import { CategoriesModule } from './categories/categories.module';
 import { UsersModule } from './users/users.module';
 import { EmailModule } from './email/email.module';
 
@@ -16,6 +17,7 @@ import { AppService } from './app.service';
     AuthModule,
     UsersModule,
     PurchasesModule,
+    CategoriesModule,
     EmailModule,
   ],
   controllers: [AppController],
