@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { PrismaService } from 'src/prisma.service';
+import { months } from 'src/constants/months';
 
 @Injectable()
 export class PurchasesService {
@@ -28,6 +29,48 @@ export class PurchasesService {
     });
 
     return purchases;
+  }
+
+  async getMonthlyStatistics(userId: number) {
+    const purchases = await this.prisma.purchase.findMany({
+      where: {
+        createdBy: userId,
+      },
+      select: {
+        price: true,
+        createdAt: true,
+        categoryId: true,
+      },
+    });
+
+    const statistics: {
+      [monthKey: string]: { month: string; [categoryId: number]: number };
+    } = {};
+
+    const categories = await this.prisma.purchaseCategory.findMany({
+      select: { id: true },
+    });
+
+    const categoryIds = categories.map((category) => category.id);
+
+    months.forEach((month, index) => {
+      const yearMonth = `${new Date().getFullYear()}-${index + 1}`;
+      statistics[yearMonth] = { month };
+      categoryIds.forEach((id) => {
+        statistics[yearMonth][id] = 0;
+      });
+    });
+
+    purchases.forEach((purchase) => {
+      const date = new Date(purchase.createdAt);
+      const yearMonth = `${date.getFullYear()}-${date.getMonth() + 1}`;
+
+      statistics[yearMonth][purchase.categoryId] += purchase.price;
+    });
+
+    const result = Object.values(statistics);
+
+    return result;
   }
 
   async getOne(userId: number, id: number) {

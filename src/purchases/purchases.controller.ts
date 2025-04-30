@@ -35,6 +35,12 @@ export class PurchasesController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('statistics')
+  async getStatistics(@Request() req: RequestWithUser) {
+    return this.purchasesService.getMonthlyStatistics(+req.user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getOne(
     @Request() req: RequestWithUser,
