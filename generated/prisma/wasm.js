@@ -127,7 +127,8 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.PurchaseCategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  description: 'description'
 };
 
 exports.Prisma.PurchaseScalarFieldEnum = {

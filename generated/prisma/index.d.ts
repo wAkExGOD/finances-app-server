@@ -2367,16 +2367,19 @@ export namespace Prisma {
   export type PurchaseCategoryMinAggregateOutputType = {
     id: number | null
     name: string | null
+    description: string | null
   }
 
   export type PurchaseCategoryMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    description: string | null
   }
 
   export type PurchaseCategoryCountAggregateOutputType = {
     id: number
     name: number
+    description: number
     _all: number
   }
 
@@ -2392,16 +2395,19 @@ export namespace Prisma {
   export type PurchaseCategoryMinAggregateInputType = {
     id?: true
     name?: true
+    description?: true
   }
 
   export type PurchaseCategoryMaxAggregateInputType = {
     id?: true
     name?: true
+    description?: true
   }
 
   export type PurchaseCategoryCountAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     _all?: true
   }
 
@@ -2494,6 +2500,7 @@ export namespace Prisma {
   export type PurchaseCategoryGroupByOutputType = {
     id: number
     name: string
+    description: string
     _count: PurchaseCategoryCountAggregateOutputType | null
     _avg: PurchaseCategoryAvgAggregateOutputType | null
     _sum: PurchaseCategorySumAggregateOutputType | null
@@ -2518,6 +2525,7 @@ export namespace Prisma {
   export type PurchaseCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
     purchases?: boolean | PurchaseCategory$purchasesArgs<ExtArgs>
     _count?: boolean | PurchaseCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["purchaseCategory"]>
@@ -2525,19 +2533,22 @@ export namespace Prisma {
   export type PurchaseCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
   }, ExtArgs["result"]["purchaseCategory"]>
 
   export type PurchaseCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
   }, ExtArgs["result"]["purchaseCategory"]>
 
   export type PurchaseCategorySelectScalar = {
     id?: boolean
     name?: boolean
+    description?: boolean
   }
 
-  export type PurchaseCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["purchaseCategory"]>
+  export type PurchaseCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["purchaseCategory"]>
   export type PurchaseCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchases?: boolean | PurchaseCategory$purchasesArgs<ExtArgs>
     _count?: boolean | PurchaseCategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -2553,6 +2564,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      description: string
     }, ExtArgs["result"]["purchaseCategory"]>
     composites: {}
   }
@@ -2979,6 +2991,7 @@ export namespace Prisma {
   interface PurchaseCategoryFieldRefs {
     readonly id: FieldRef<"PurchaseCategory", 'Int'>
     readonly name: FieldRef<"PurchaseCategory", 'String'>
+    readonly description: FieldRef<"PurchaseCategory", 'String'>
   }
     
 
@@ -5627,7 +5640,8 @@ export namespace Prisma {
 
   export const PurchaseCategoryScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    description: 'description'
   };
 
   export type PurchaseCategoryScalarFieldEnum = (typeof PurchaseCategoryScalarFieldEnum)[keyof typeof PurchaseCategoryScalarFieldEnum]
@@ -5807,12 +5821,14 @@ export namespace Prisma {
     NOT?: PurchaseCategoryWhereInput | PurchaseCategoryWhereInput[]
     id?: IntFilter<"PurchaseCategory"> | number
     name?: StringFilter<"PurchaseCategory"> | string
+    description?: StringFilter<"PurchaseCategory"> | string
     purchases?: PurchaseListRelationFilter
   }
 
   export type PurchaseCategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     purchases?: PurchaseOrderByRelationAggregateInput
   }
 
@@ -5822,12 +5838,14 @@ export namespace Prisma {
     AND?: PurchaseCategoryWhereInput | PurchaseCategoryWhereInput[]
     OR?: PurchaseCategoryWhereInput[]
     NOT?: PurchaseCategoryWhereInput | PurchaseCategoryWhereInput[]
+    description?: StringFilter<"PurchaseCategory"> | string
     purchases?: PurchaseListRelationFilter
   }, "id" | "name">
 
   export type PurchaseCategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     _count?: PurchaseCategoryCountOrderByAggregateInput
     _avg?: PurchaseCategoryAvgOrderByAggregateInput
     _max?: PurchaseCategoryMaxOrderByAggregateInput
@@ -5841,6 +5859,7 @@ export namespace Prisma {
     NOT?: PurchaseCategoryScalarWhereWithAggregatesInput | PurchaseCategoryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PurchaseCategory"> | number
     name?: StringWithAggregatesFilter<"PurchaseCategory"> | string
+    description?: StringWithAggregatesFilter<"PurchaseCategory"> | string
   }
 
   export type PurchaseWhereInput = {
@@ -6018,38 +6037,45 @@ export namespace Prisma {
 
   export type PurchaseCategoryCreateInput = {
     name: string
+    description: string
     purchases?: PurchaseCreateNestedManyWithoutCategoryInput
   }
 
   export type PurchaseCategoryUncheckedCreateInput = {
     id?: number
     name: string
+    description: string
     purchases?: PurchaseUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type PurchaseCategoryUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     purchases?: PurchaseUpdateManyWithoutCategoryNestedInput
   }
 
   export type PurchaseCategoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     purchases?: PurchaseUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type PurchaseCategoryCreateManyInput = {
     id?: number
     name: string
+    description: string
   }
 
   export type PurchaseCategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type PurchaseCategoryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type PurchaseCreateInput = {
@@ -6304,6 +6330,7 @@ export namespace Prisma {
   export type PurchaseCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
   }
 
   export type PurchaseCategoryAvgOrderByAggregateInput = {
@@ -6313,11 +6340,13 @@ export namespace Prisma {
   export type PurchaseCategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
   }
 
   export type PurchaseCategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
   }
 
   export type PurchaseCategorySumOrderByAggregateInput = {
@@ -6890,11 +6919,13 @@ export namespace Prisma {
 
   export type PurchaseCategoryCreateWithoutPurchasesInput = {
     name: string
+    description: string
   }
 
   export type PurchaseCategoryUncheckedCreateWithoutPurchasesInput = {
     id?: number
     name: string
+    description: string
   }
 
   export type PurchaseCategoryCreateOrConnectWithoutPurchasesInput = {
@@ -6937,11 +6968,13 @@ export namespace Prisma {
 
   export type PurchaseCategoryUpdateWithoutPurchasesInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type PurchaseCategoryUncheckedUpdateWithoutPurchasesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpsertWithoutPurchasesInput = {

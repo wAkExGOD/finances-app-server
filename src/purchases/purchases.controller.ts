@@ -37,7 +37,7 @@ export class PurchasesController {
   @UseGuards(JwtAuthGuard)
   @Get('statistics')
   async getStatistics(@Request() req: RequestWithUser) {
-    return this.purchasesService.getMonthlyStatistics(+req.user.id);
+    return this.purchasesService.getDailyStatistics(+req.user.id);
   }
 
   @UseGuards(JwtAuthGuard)

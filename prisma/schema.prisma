@@ -19,9 +19,10 @@ model User {
 }
 
 model PurchaseCategory {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
-  purchases Purchase[]
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String
+  purchases   Purchase[]
 }
 
 model Purchase {
