@@ -9,19 +9,21 @@ datasource db {
 }
 
 model User {
-  id        Int                  @id @default(autoincrement())
-  email     String               @unique
-  createdAt DateTime             @default(now())
-  password  String
-  verified  Boolean              @default(false)
-  purchases Purchase[]
-  token     ConfirmEmailTokens[]
+  id                    Int                     @id @default(autoincrement())
+  email                 String                  @unique
+  createdAt             DateTime                @default(now())
+  password              String
+  verified              Boolean                 @default(false)
+  purchases             Purchase[]
+  confirmEmailToken     ConfirmEmailToken[]
+  recoveryPasswordToken PasswordRecoveryToken[]
 }
 
 model PurchaseCategory {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
-  purchases Purchase[]
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String
+  purchases   Purchase[]
 }
 
 model Purchase {
@@ -36,7 +38,13 @@ model Purchase {
   creator    User             @relation(fields: [createdBy], references: [id])
 }
 
-model ConfirmEmailTokens {
+model ConfirmEmailToken {
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @id
+  token  String @unique
+}
+
+model PasswordRecoveryToken {
   user   User   @relation(fields: [userId], references: [id])
   userId Int    @id
   token  String @unique

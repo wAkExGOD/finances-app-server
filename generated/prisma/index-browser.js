@@ -141,7 +141,12 @@ exports.Prisma.PurchaseScalarFieldEnum = {
   categoryId: 'categoryId'
 };
 
-exports.Prisma.ConfirmEmailTokensScalarFieldEnum = {
+exports.Prisma.ConfirmEmailTokenScalarFieldEnum = {
+  userId: 'userId',
+  token: 'token'
+};
+
+exports.Prisma.PasswordRecoveryTokenScalarFieldEnum = {
   userId: 'userId',
   token: 'token'
 };
@@ -161,7 +166,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   PurchaseCategory: 'PurchaseCategory',
   Purchase: 'Purchase',
-  ConfirmEmailTokens: 'ConfirmEmailTokens'
+  ConfirmEmailToken: 'ConfirmEmailToken',
+  PasswordRecoveryToken: 'PasswordRecoveryToken'
 };
 
 /**

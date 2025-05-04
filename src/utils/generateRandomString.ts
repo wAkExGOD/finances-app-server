@@ -1,3 +1,7 @@
+/**
+ * Returns random string splitted by '-'
+ * like abcd-efgh-ijkl-mnop (length = 19)
+ */
 export function generateRandomString(str: string) {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';

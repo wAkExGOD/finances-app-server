@@ -14,6 +14,8 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { RequestWithUser } from 'src/types';
+import { ForgotPasswordDto } from 'src/users/dto/forgot-password.dto';
+import { ChangePasswordDto } from 'src/users/dto/change-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -30,6 +32,19 @@ export class AuthController {
   @Post('register')
   async register(@Body() registerBody: CreateUserDto) {
     return await this.authService.register(registerBody);
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body() forgotPasswordBody: ForgotPasswordDto) {
+    return await this.authService.forgotPassword(forgotPasswordBody.email);
+  }
+
+  @Post('change-password')
+  async changePassword(@Body() changePasswordBody: ChangePasswordDto) {
+    return await this.authService.changePassword(
+      changePasswordBody.token,
+      changePasswordBody.password,
+    );
   }
 
   @UseGuards(JwtAuthGuard)

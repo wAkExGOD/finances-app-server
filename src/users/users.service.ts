@@ -24,8 +24,26 @@ export class UsersService {
     return await this.prisma.user.findUnique({ where: { email } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user (${updateUserDto.email})`;
+  async findOneByRecoveryPasswordToken(token: string) {
+    const data = await this.prisma.passwordRecoveryToken.findUnique({
+      where: {
+        token: token,
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return data?.user;
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: updateUserDto,
+    });
   }
 
   async verify(id: number) {

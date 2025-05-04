@@ -29,10 +29,15 @@ export type PurchaseCategory = $Result.DefaultSelection<Prisma.$PurchaseCategory
  */
 export type Purchase = $Result.DefaultSelection<Prisma.$PurchasePayload>
 /**
- * Model ConfirmEmailTokens
+ * Model ConfirmEmailToken
  * 
  */
-export type ConfirmEmailTokens = $Result.DefaultSelection<Prisma.$ConfirmEmailTokensPayload>
+export type ConfirmEmailToken = $Result.DefaultSelection<Prisma.$ConfirmEmailTokenPayload>
+/**
+ * Model PasswordRecoveryToken
+ * 
+ */
+export type PasswordRecoveryToken = $Result.DefaultSelection<Prisma.$PasswordRecoveryTokenPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -190,14 +195,24 @@ export class PrismaClient<
   get purchase(): Prisma.PurchaseDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.confirmEmailTokens`: Exposes CRUD operations for the **ConfirmEmailTokens** model.
+   * `prisma.confirmEmailToken`: Exposes CRUD operations for the **ConfirmEmailToken** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more ConfirmEmailTokens
-    * const confirmEmailTokens = await prisma.confirmEmailTokens.findMany()
+    * const confirmEmailTokens = await prisma.confirmEmailToken.findMany()
     * ```
     */
-  get confirmEmailTokens(): Prisma.ConfirmEmailTokensDelegate<ExtArgs, ClientOptions>;
+  get confirmEmailToken(): Prisma.ConfirmEmailTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.passwordRecoveryToken`: Exposes CRUD operations for the **PasswordRecoveryToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PasswordRecoveryTokens
+    * const passwordRecoveryTokens = await prisma.passwordRecoveryToken.findMany()
+    * ```
+    */
+  get passwordRecoveryToken(): Prisma.PasswordRecoveryTokenDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +656,8 @@ export namespace Prisma {
     User: 'User',
     PurchaseCategory: 'PurchaseCategory',
     Purchase: 'Purchase',
-    ConfirmEmailTokens: 'ConfirmEmailTokens'
+    ConfirmEmailToken: 'ConfirmEmailToken',
+    PasswordRecoveryToken: 'PasswordRecoveryToken'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "purchaseCategory" | "purchase" | "confirmEmailTokens"
+      modelProps: "user" | "purchaseCategory" | "purchase" | "confirmEmailToken" | "passwordRecoveryToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -886,77 +902,151 @@ export namespace Prisma {
           }
         }
       }
-      ConfirmEmailTokens: {
-        payload: Prisma.$ConfirmEmailTokensPayload<ExtArgs>
-        fields: Prisma.ConfirmEmailTokensFieldRefs
+      ConfirmEmailToken: {
+        payload: Prisma.$ConfirmEmailTokenPayload<ExtArgs>
+        fields: Prisma.ConfirmEmailTokenFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ConfirmEmailTokensFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload> | null
+            args: Prisma.ConfirmEmailTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ConfirmEmailTokensFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+            args: Prisma.ConfirmEmailTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>
           }
           findFirst: {
-            args: Prisma.ConfirmEmailTokensFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload> | null
+            args: Prisma.ConfirmEmailTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ConfirmEmailTokensFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+            args: Prisma.ConfirmEmailTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>
           }
           findMany: {
-            args: Prisma.ConfirmEmailTokensFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>[]
+            args: Prisma.ConfirmEmailTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>[]
           }
           create: {
-            args: Prisma.ConfirmEmailTokensCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+            args: Prisma.ConfirmEmailTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>
           }
           createMany: {
-            args: Prisma.ConfirmEmailTokensCreateManyArgs<ExtArgs>
+            args: Prisma.ConfirmEmailTokenCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.ConfirmEmailTokensCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>[]
+            args: Prisma.ConfirmEmailTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>[]
           }
           delete: {
-            args: Prisma.ConfirmEmailTokensDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+            args: Prisma.ConfirmEmailTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>
           }
           update: {
-            args: Prisma.ConfirmEmailTokensUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+            args: Prisma.ConfirmEmailTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>
           }
           deleteMany: {
-            args: Prisma.ConfirmEmailTokensDeleteManyArgs<ExtArgs>
+            args: Prisma.ConfirmEmailTokenDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.ConfirmEmailTokensUpdateManyArgs<ExtArgs>
+            args: Prisma.ConfirmEmailTokenUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.ConfirmEmailTokensUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>[]
+            args: Prisma.ConfirmEmailTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>[]
           }
           upsert: {
-            args: Prisma.ConfirmEmailTokensUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokensPayload>
+            args: Prisma.ConfirmEmailTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConfirmEmailTokenPayload>
           }
           aggregate: {
-            args: Prisma.ConfirmEmailTokensAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateConfirmEmailTokens>
+            args: Prisma.ConfirmEmailTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConfirmEmailToken>
           }
           groupBy: {
-            args: Prisma.ConfirmEmailTokensGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ConfirmEmailTokensGroupByOutputType>[]
+            args: Prisma.ConfirmEmailTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConfirmEmailTokenGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ConfirmEmailTokensCountArgs<ExtArgs>
-            result: $Utils.Optional<ConfirmEmailTokensCountAggregateOutputType> | number
+            args: Prisma.ConfirmEmailTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<ConfirmEmailTokenCountAggregateOutputType> | number
+          }
+        }
+      }
+      PasswordRecoveryToken: {
+        payload: Prisma.$PasswordRecoveryTokenPayload<ExtArgs>
+        fields: Prisma.PasswordRecoveryTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PasswordRecoveryTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PasswordRecoveryTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.PasswordRecoveryTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PasswordRecoveryTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>
+          }
+          findMany: {
+            args: Prisma.PasswordRecoveryTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>[]
+          }
+          create: {
+            args: Prisma.PasswordRecoveryTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>
+          }
+          createMany: {
+            args: Prisma.PasswordRecoveryTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PasswordRecoveryTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.PasswordRecoveryTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>
+          }
+          update: {
+            args: Prisma.PasswordRecoveryTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.PasswordRecoveryTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PasswordRecoveryTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PasswordRecoveryTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.PasswordRecoveryTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordRecoveryTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.PasswordRecoveryTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePasswordRecoveryToken>
+          }
+          groupBy: {
+            args: Prisma.PasswordRecoveryTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PasswordRecoveryTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PasswordRecoveryTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<PasswordRecoveryTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -1047,7 +1137,8 @@ export namespace Prisma {
     user?: UserOmit
     purchaseCategory?: PurchaseCategoryOmit
     purchase?: PurchaseOmit
-    confirmEmailTokens?: ConfirmEmailTokensOmit
+    confirmEmailToken?: ConfirmEmailTokenOmit
+    passwordRecoveryToken?: PasswordRecoveryTokenOmit
   }
 
   /* Types for Logging */
@@ -1143,12 +1234,14 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     purchases: number
-    token: number
+    confirmEmailToken: number
+    recoveryPasswordToken: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchases?: boolean | UserCountOutputTypeCountPurchasesArgs
-    token?: boolean | UserCountOutputTypeCountTokenArgs
+    confirmEmailToken?: boolean | UserCountOutputTypeCountConfirmEmailTokenArgs
+    recoveryPasswordToken?: boolean | UserCountOutputTypeCountRecoveryPasswordTokenArgs
   }
 
   // Custom InputTypes
@@ -1172,8 +1265,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConfirmEmailTokensWhereInput
+  export type UserCountOutputTypeCountConfirmEmailTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConfirmEmailTokenWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRecoveryPasswordTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PasswordRecoveryTokenWhereInput
   }
 
 
@@ -1411,7 +1511,8 @@ export namespace Prisma {
     password?: boolean
     verified?: boolean
     purchases?: boolean | User$purchasesArgs<ExtArgs>
-    token?: boolean | User$tokenArgs<ExtArgs>
+    confirmEmailToken?: boolean | User$confirmEmailTokenArgs<ExtArgs>
+    recoveryPasswordToken?: boolean | User$recoveryPasswordTokenArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1442,7 +1543,8 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "createdAt" | "password" | "verified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     purchases?: boolean | User$purchasesArgs<ExtArgs>
-    token?: boolean | User$tokenArgs<ExtArgs>
+    confirmEmailToken?: boolean | User$confirmEmailTokenArgs<ExtArgs>
+    recoveryPasswordToken?: boolean | User$recoveryPasswordTokenArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1452,7 +1554,8 @@ export namespace Prisma {
     name: "User"
     objects: {
       purchases: Prisma.$PurchasePayload<ExtArgs>[]
-      token: Prisma.$ConfirmEmailTokensPayload<ExtArgs>[]
+      confirmEmailToken: Prisma.$ConfirmEmailTokenPayload<ExtArgs>[]
+      recoveryPasswordToken: Prisma.$PasswordRecoveryTokenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1855,7 +1958,8 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     purchases<T extends User$purchasesArgs<ExtArgs> = {}>(args?: Subset<T, User$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    token<T extends User$tokenArgs<ExtArgs> = {}>(args?: Subset<T, User$tokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    confirmEmailToken<T extends User$confirmEmailTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$confirmEmailTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recoveryPasswordToken<T extends User$recoveryPasswordTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$recoveryPasswordTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2302,27 +2406,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.token
+   * User.confirmEmailToken
    */
-  export type User$tokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$confirmEmailTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
-    where?: ConfirmEmailTokensWhereInput
-    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
-    cursor?: ConfirmEmailTokensWhereUniqueInput
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
+    where?: ConfirmEmailTokenWhereInput
+    orderBy?: ConfirmEmailTokenOrderByWithRelationInput | ConfirmEmailTokenOrderByWithRelationInput[]
+    cursor?: ConfirmEmailTokenWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+    distinct?: ConfirmEmailTokenScalarFieldEnum | ConfirmEmailTokenScalarFieldEnum[]
+  }
+
+  /**
+   * User.recoveryPasswordToken
+   */
+  export type User$recoveryPasswordTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    where?: PasswordRecoveryTokenWhereInput
+    orderBy?: PasswordRecoveryTokenOrderByWithRelationInput | PasswordRecoveryTokenOrderByWithRelationInput[]
+    cursor?: PasswordRecoveryTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PasswordRecoveryTokenScalarFieldEnum | PasswordRecoveryTokenScalarFieldEnum[]
   }
 
   /**
@@ -4561,83 +4689,83 @@ export namespace Prisma {
 
 
   /**
-   * Model ConfirmEmailTokens
+   * Model ConfirmEmailToken
    */
 
-  export type AggregateConfirmEmailTokens = {
-    _count: ConfirmEmailTokensCountAggregateOutputType | null
-    _avg: ConfirmEmailTokensAvgAggregateOutputType | null
-    _sum: ConfirmEmailTokensSumAggregateOutputType | null
-    _min: ConfirmEmailTokensMinAggregateOutputType | null
-    _max: ConfirmEmailTokensMaxAggregateOutputType | null
+  export type AggregateConfirmEmailToken = {
+    _count: ConfirmEmailTokenCountAggregateOutputType | null
+    _avg: ConfirmEmailTokenAvgAggregateOutputType | null
+    _sum: ConfirmEmailTokenSumAggregateOutputType | null
+    _min: ConfirmEmailTokenMinAggregateOutputType | null
+    _max: ConfirmEmailTokenMaxAggregateOutputType | null
   }
 
-  export type ConfirmEmailTokensAvgAggregateOutputType = {
+  export type ConfirmEmailTokenAvgAggregateOutputType = {
     userId: number | null
   }
 
-  export type ConfirmEmailTokensSumAggregateOutputType = {
+  export type ConfirmEmailTokenSumAggregateOutputType = {
     userId: number | null
   }
 
-  export type ConfirmEmailTokensMinAggregateOutputType = {
-    userId: number | null
-    token: string | null
-  }
-
-  export type ConfirmEmailTokensMaxAggregateOutputType = {
+  export type ConfirmEmailTokenMinAggregateOutputType = {
     userId: number | null
     token: string | null
   }
 
-  export type ConfirmEmailTokensCountAggregateOutputType = {
+  export type ConfirmEmailTokenMaxAggregateOutputType = {
+    userId: number | null
+    token: string | null
+  }
+
+  export type ConfirmEmailTokenCountAggregateOutputType = {
     userId: number
     token: number
     _all: number
   }
 
 
-  export type ConfirmEmailTokensAvgAggregateInputType = {
+  export type ConfirmEmailTokenAvgAggregateInputType = {
     userId?: true
   }
 
-  export type ConfirmEmailTokensSumAggregateInputType = {
+  export type ConfirmEmailTokenSumAggregateInputType = {
     userId?: true
   }
 
-  export type ConfirmEmailTokensMinAggregateInputType = {
-    userId?: true
-    token?: true
-  }
-
-  export type ConfirmEmailTokensMaxAggregateInputType = {
+  export type ConfirmEmailTokenMinAggregateInputType = {
     userId?: true
     token?: true
   }
 
-  export type ConfirmEmailTokensCountAggregateInputType = {
+  export type ConfirmEmailTokenMaxAggregateInputType = {
+    userId?: true
+    token?: true
+  }
+
+  export type ConfirmEmailTokenCountAggregateInputType = {
     userId?: true
     token?: true
     _all?: true
   }
 
-  export type ConfirmEmailTokensAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which ConfirmEmailTokens to aggregate.
+     * Filter which ConfirmEmailToken to aggregate.
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of ConfirmEmailTokens to fetch.
      */
-    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    orderBy?: ConfirmEmailTokenOrderByWithRelationInput | ConfirmEmailTokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ConfirmEmailTokensWhereUniqueInput
+    cursor?: ConfirmEmailTokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -4655,254 +4783,254 @@ export namespace Prisma {
      * 
      * Count returned ConfirmEmailTokens
     **/
-    _count?: true | ConfirmEmailTokensCountAggregateInputType
+    _count?: true | ConfirmEmailTokenCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: ConfirmEmailTokensAvgAggregateInputType
+    _avg?: ConfirmEmailTokenAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: ConfirmEmailTokensSumAggregateInputType
+    _sum?: ConfirmEmailTokenSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ConfirmEmailTokensMinAggregateInputType
+    _min?: ConfirmEmailTokenMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ConfirmEmailTokensMaxAggregateInputType
+    _max?: ConfirmEmailTokenMaxAggregateInputType
   }
 
-  export type GetConfirmEmailTokensAggregateType<T extends ConfirmEmailTokensAggregateArgs> = {
-        [P in keyof T & keyof AggregateConfirmEmailTokens]: P extends '_count' | 'count'
+  export type GetConfirmEmailTokenAggregateType<T extends ConfirmEmailTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateConfirmEmailToken]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateConfirmEmailTokens[P]>
-      : GetScalarType<T[P], AggregateConfirmEmailTokens[P]>
+        : GetScalarType<T[P], AggregateConfirmEmailToken[P]>
+      : GetScalarType<T[P], AggregateConfirmEmailToken[P]>
   }
 
 
 
 
-  export type ConfirmEmailTokensGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConfirmEmailTokensWhereInput
-    orderBy?: ConfirmEmailTokensOrderByWithAggregationInput | ConfirmEmailTokensOrderByWithAggregationInput[]
-    by: ConfirmEmailTokensScalarFieldEnum[] | ConfirmEmailTokensScalarFieldEnum
-    having?: ConfirmEmailTokensScalarWhereWithAggregatesInput
+  export type ConfirmEmailTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConfirmEmailTokenWhereInput
+    orderBy?: ConfirmEmailTokenOrderByWithAggregationInput | ConfirmEmailTokenOrderByWithAggregationInput[]
+    by: ConfirmEmailTokenScalarFieldEnum[] | ConfirmEmailTokenScalarFieldEnum
+    having?: ConfirmEmailTokenScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ConfirmEmailTokensCountAggregateInputType | true
-    _avg?: ConfirmEmailTokensAvgAggregateInputType
-    _sum?: ConfirmEmailTokensSumAggregateInputType
-    _min?: ConfirmEmailTokensMinAggregateInputType
-    _max?: ConfirmEmailTokensMaxAggregateInputType
+    _count?: ConfirmEmailTokenCountAggregateInputType | true
+    _avg?: ConfirmEmailTokenAvgAggregateInputType
+    _sum?: ConfirmEmailTokenSumAggregateInputType
+    _min?: ConfirmEmailTokenMinAggregateInputType
+    _max?: ConfirmEmailTokenMaxAggregateInputType
   }
 
-  export type ConfirmEmailTokensGroupByOutputType = {
+  export type ConfirmEmailTokenGroupByOutputType = {
     userId: number
     token: string
-    _count: ConfirmEmailTokensCountAggregateOutputType | null
-    _avg: ConfirmEmailTokensAvgAggregateOutputType | null
-    _sum: ConfirmEmailTokensSumAggregateOutputType | null
-    _min: ConfirmEmailTokensMinAggregateOutputType | null
-    _max: ConfirmEmailTokensMaxAggregateOutputType | null
+    _count: ConfirmEmailTokenCountAggregateOutputType | null
+    _avg: ConfirmEmailTokenAvgAggregateOutputType | null
+    _sum: ConfirmEmailTokenSumAggregateOutputType | null
+    _min: ConfirmEmailTokenMinAggregateOutputType | null
+    _max: ConfirmEmailTokenMaxAggregateOutputType | null
   }
 
-  type GetConfirmEmailTokensGroupByPayload<T extends ConfirmEmailTokensGroupByArgs> = Prisma.PrismaPromise<
+  type GetConfirmEmailTokenGroupByPayload<T extends ConfirmEmailTokenGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ConfirmEmailTokensGroupByOutputType, T['by']> &
+      PickEnumerable<ConfirmEmailTokenGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ConfirmEmailTokensGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ConfirmEmailTokenGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ConfirmEmailTokensGroupByOutputType[P]>
-            : GetScalarType<T[P], ConfirmEmailTokensGroupByOutputType[P]>
+              : GetScalarType<T[P], ConfirmEmailTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], ConfirmEmailTokenGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ConfirmEmailTokensSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ConfirmEmailTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     token?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["confirmEmailTokens"]>
+  }, ExtArgs["result"]["confirmEmailToken"]>
 
-  export type ConfirmEmailTokensSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ConfirmEmailTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     token?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["confirmEmailTokens"]>
+  }, ExtArgs["result"]["confirmEmailToken"]>
 
-  export type ConfirmEmailTokensSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ConfirmEmailTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     userId?: boolean
     token?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["confirmEmailTokens"]>
+  }, ExtArgs["result"]["confirmEmailToken"]>
 
-  export type ConfirmEmailTokensSelectScalar = {
+  export type ConfirmEmailTokenSelectScalar = {
     userId?: boolean
     token?: boolean
   }
 
-  export type ConfirmEmailTokensOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "token", ExtArgs["result"]["confirmEmailTokens"]>
-  export type ConfirmEmailTokensInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "token", ExtArgs["result"]["confirmEmailToken"]>
+  export type ConfirmEmailTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type ConfirmEmailTokensIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type ConfirmEmailTokensIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $ConfirmEmailTokensPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ConfirmEmailTokens"
+  export type $ConfirmEmailTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConfirmEmailToken"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: number
       token: string
-    }, ExtArgs["result"]["confirmEmailTokens"]>
+    }, ExtArgs["result"]["confirmEmailToken"]>
     composites: {}
   }
 
-  type ConfirmEmailTokensGetPayload<S extends boolean | null | undefined | ConfirmEmailTokensDefaultArgs> = $Result.GetResult<Prisma.$ConfirmEmailTokensPayload, S>
+  type ConfirmEmailTokenGetPayload<S extends boolean | null | undefined | ConfirmEmailTokenDefaultArgs> = $Result.GetResult<Prisma.$ConfirmEmailTokenPayload, S>
 
-  type ConfirmEmailTokensCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ConfirmEmailTokensFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ConfirmEmailTokensCountAggregateInputType | true
+  type ConfirmEmailTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConfirmEmailTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConfirmEmailTokenCountAggregateInputType | true
     }
 
-  export interface ConfirmEmailTokensDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConfirmEmailTokens'], meta: { name: 'ConfirmEmailTokens' } }
+  export interface ConfirmEmailTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConfirmEmailToken'], meta: { name: 'ConfirmEmailToken' } }
     /**
-     * Find zero or one ConfirmEmailTokens that matches the filter.
-     * @param {ConfirmEmailTokensFindUniqueArgs} args - Arguments to find a ConfirmEmailTokens
+     * Find zero or one ConfirmEmailToken that matches the filter.
+     * @param {ConfirmEmailTokenFindUniqueArgs} args - Arguments to find a ConfirmEmailToken
      * @example
-     * // Get one ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.findUnique({
+     * // Get one ConfirmEmailToken
+     * const confirmEmailToken = await prisma.confirmEmailToken.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends ConfirmEmailTokensFindUniqueArgs>(args: SelectSubset<T, ConfirmEmailTokensFindUniqueArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends ConfirmEmailTokenFindUniqueArgs>(args: SelectSubset<T, ConfirmEmailTokenFindUniqueArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one ConfirmEmailTokens that matches the filter or throw an error with `error.code='P2025'`
+     * Find one ConfirmEmailToken that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {ConfirmEmailTokensFindUniqueOrThrowArgs} args - Arguments to find a ConfirmEmailTokens
+     * @param {ConfirmEmailTokenFindUniqueOrThrowArgs} args - Arguments to find a ConfirmEmailToken
      * @example
-     * // Get one ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.findUniqueOrThrow({
+     * // Get one ConfirmEmailToken
+     * const confirmEmailToken = await prisma.confirmEmailToken.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ConfirmEmailTokensFindUniqueOrThrowArgs>(args: SelectSubset<T, ConfirmEmailTokensFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends ConfirmEmailTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, ConfirmEmailTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first ConfirmEmailTokens that matches the filter.
+     * Find the first ConfirmEmailToken that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensFindFirstArgs} args - Arguments to find a ConfirmEmailTokens
+     * @param {ConfirmEmailTokenFindFirstArgs} args - Arguments to find a ConfirmEmailToken
      * @example
-     * // Get one ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.findFirst({
+     * // Get one ConfirmEmailToken
+     * const confirmEmailToken = await prisma.confirmEmailToken.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends ConfirmEmailTokensFindFirstArgs>(args?: SelectSubset<T, ConfirmEmailTokensFindFirstArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends ConfirmEmailTokenFindFirstArgs>(args?: SelectSubset<T, ConfirmEmailTokenFindFirstArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first ConfirmEmailTokens that matches the filter or
+     * Find the first ConfirmEmailToken that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensFindFirstOrThrowArgs} args - Arguments to find a ConfirmEmailTokens
+     * @param {ConfirmEmailTokenFindFirstOrThrowArgs} args - Arguments to find a ConfirmEmailToken
      * @example
-     * // Get one ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.findFirstOrThrow({
+     * // Get one ConfirmEmailToken
+     * const confirmEmailToken = await prisma.confirmEmailToken.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends ConfirmEmailTokensFindFirstOrThrowArgs>(args?: SelectSubset<T, ConfirmEmailTokensFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends ConfirmEmailTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, ConfirmEmailTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more ConfirmEmailTokens that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {ConfirmEmailTokenFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.findMany()
+     * const confirmEmailTokens = await prisma.confirmEmailToken.findMany()
      * 
      * // Get first 10 ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.findMany({ take: 10 })
+     * const confirmEmailTokens = await prisma.confirmEmailToken.findMany({ take: 10 })
      * 
      * // Only select the `userId`
-     * const confirmEmailTokensWithUserIdOnly = await prisma.confirmEmailTokens.findMany({ select: { userId: true } })
+     * const confirmEmailTokenWithUserIdOnly = await prisma.confirmEmailToken.findMany({ select: { userId: true } })
      * 
      */
-    findMany<T extends ConfirmEmailTokensFindManyArgs>(args?: SelectSubset<T, ConfirmEmailTokensFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends ConfirmEmailTokenFindManyArgs>(args?: SelectSubset<T, ConfirmEmailTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a ConfirmEmailTokens.
-     * @param {ConfirmEmailTokensCreateArgs} args - Arguments to create a ConfirmEmailTokens.
+     * Create a ConfirmEmailToken.
+     * @param {ConfirmEmailTokenCreateArgs} args - Arguments to create a ConfirmEmailToken.
      * @example
-     * // Create one ConfirmEmailTokens
-     * const ConfirmEmailTokens = await prisma.confirmEmailTokens.create({
+     * // Create one ConfirmEmailToken
+     * const ConfirmEmailToken = await prisma.confirmEmailToken.create({
      *   data: {
-     *     // ... data to create a ConfirmEmailTokens
+     *     // ... data to create a ConfirmEmailToken
      *   }
      * })
      * 
      */
-    create<T extends ConfirmEmailTokensCreateArgs>(args: SelectSubset<T, ConfirmEmailTokensCreateArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends ConfirmEmailTokenCreateArgs>(args: SelectSubset<T, ConfirmEmailTokenCreateArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many ConfirmEmailTokens.
-     * @param {ConfirmEmailTokensCreateManyArgs} args - Arguments to create many ConfirmEmailTokens.
+     * @param {ConfirmEmailTokenCreateManyArgs} args - Arguments to create many ConfirmEmailTokens.
      * @example
      * // Create many ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.createMany({
+     * const confirmEmailToken = await prisma.confirmEmailToken.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends ConfirmEmailTokensCreateManyArgs>(args?: SelectSubset<T, ConfirmEmailTokensCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends ConfirmEmailTokenCreateManyArgs>(args?: SelectSubset<T, ConfirmEmailTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many ConfirmEmailTokens and returns the data saved in the database.
-     * @param {ConfirmEmailTokensCreateManyAndReturnArgs} args - Arguments to create many ConfirmEmailTokens.
+     * @param {ConfirmEmailTokenCreateManyAndReturnArgs} args - Arguments to create many ConfirmEmailTokens.
      * @example
      * // Create many ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.createManyAndReturn({
+     * const confirmEmailToken = await prisma.confirmEmailToken.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
      * // Create many ConfirmEmailTokens and only return the `userId`
-     * const confirmEmailTokensWithUserIdOnly = await prisma.confirmEmailTokens.createManyAndReturn({
+     * const confirmEmailTokenWithUserIdOnly = await prisma.confirmEmailToken.createManyAndReturn({
      *   select: { userId: true },
      *   data: [
      *     // ... provide data here
@@ -4912,28 +5040,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ConfirmEmailTokensCreateManyAndReturnArgs>(args?: SelectSubset<T, ConfirmEmailTokensCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends ConfirmEmailTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, ConfirmEmailTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a ConfirmEmailTokens.
-     * @param {ConfirmEmailTokensDeleteArgs} args - Arguments to delete one ConfirmEmailTokens.
+     * Delete a ConfirmEmailToken.
+     * @param {ConfirmEmailTokenDeleteArgs} args - Arguments to delete one ConfirmEmailToken.
      * @example
-     * // Delete one ConfirmEmailTokens
-     * const ConfirmEmailTokens = await prisma.confirmEmailTokens.delete({
+     * // Delete one ConfirmEmailToken
+     * const ConfirmEmailToken = await prisma.confirmEmailToken.delete({
      *   where: {
-     *     // ... filter to delete one ConfirmEmailTokens
+     *     // ... filter to delete one ConfirmEmailToken
      *   }
      * })
      * 
      */
-    delete<T extends ConfirmEmailTokensDeleteArgs>(args: SelectSubset<T, ConfirmEmailTokensDeleteArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends ConfirmEmailTokenDeleteArgs>(args: SelectSubset<T, ConfirmEmailTokenDeleteArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one ConfirmEmailTokens.
-     * @param {ConfirmEmailTokensUpdateArgs} args - Arguments to update one ConfirmEmailTokens.
+     * Update one ConfirmEmailToken.
+     * @param {ConfirmEmailTokenUpdateArgs} args - Arguments to update one ConfirmEmailToken.
      * @example
-     * // Update one ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.update({
+     * // Update one ConfirmEmailToken
+     * const confirmEmailToken = await prisma.confirmEmailToken.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4943,30 +5071,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ConfirmEmailTokensUpdateArgs>(args: SelectSubset<T, ConfirmEmailTokensUpdateArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends ConfirmEmailTokenUpdateArgs>(args: SelectSubset<T, ConfirmEmailTokenUpdateArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more ConfirmEmailTokens.
-     * @param {ConfirmEmailTokensDeleteManyArgs} args - Arguments to filter ConfirmEmailTokens to delete.
+     * @param {ConfirmEmailTokenDeleteManyArgs} args - Arguments to filter ConfirmEmailTokens to delete.
      * @example
      * // Delete a few ConfirmEmailTokens
-     * const { count } = await prisma.confirmEmailTokens.deleteMany({
+     * const { count } = await prisma.confirmEmailToken.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends ConfirmEmailTokensDeleteManyArgs>(args?: SelectSubset<T, ConfirmEmailTokensDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends ConfirmEmailTokenDeleteManyArgs>(args?: SelectSubset<T, ConfirmEmailTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more ConfirmEmailTokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ConfirmEmailTokenUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.updateMany({
+     * const confirmEmailToken = await prisma.confirmEmailToken.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4976,14 +5104,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends ConfirmEmailTokensUpdateManyArgs>(args: SelectSubset<T, ConfirmEmailTokensUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends ConfirmEmailTokenUpdateManyArgs>(args: SelectSubset<T, ConfirmEmailTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more ConfirmEmailTokens and returns the data updated in the database.
-     * @param {ConfirmEmailTokensUpdateManyAndReturnArgs} args - Arguments to update many ConfirmEmailTokens.
+     * @param {ConfirmEmailTokenUpdateManyAndReturnArgs} args - Arguments to update many ConfirmEmailTokens.
      * @example
      * // Update many ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.updateManyAndReturn({
+     * const confirmEmailToken = await prisma.confirmEmailToken.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4993,7 +5121,7 @@ export namespace Prisma {
      * })
      * 
      * // Update zero or more ConfirmEmailTokens and only return the `userId`
-     * const confirmEmailTokensWithUserIdOnly = await prisma.confirmEmailTokens.updateManyAndReturn({
+     * const confirmEmailTokenWithUserIdOnly = await prisma.confirmEmailToken.updateManyAndReturn({
      *   select: { userId: true },
      *   where: {
      *     // ... provide filter here
@@ -5006,56 +5134,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ConfirmEmailTokensUpdateManyAndReturnArgs>(args: SelectSubset<T, ConfirmEmailTokensUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends ConfirmEmailTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, ConfirmEmailTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one ConfirmEmailTokens.
-     * @param {ConfirmEmailTokensUpsertArgs} args - Arguments to update or create a ConfirmEmailTokens.
+     * Create or update one ConfirmEmailToken.
+     * @param {ConfirmEmailTokenUpsertArgs} args - Arguments to update or create a ConfirmEmailToken.
      * @example
-     * // Update or create a ConfirmEmailTokens
-     * const confirmEmailTokens = await prisma.confirmEmailTokens.upsert({
+     * // Update or create a ConfirmEmailToken
+     * const confirmEmailToken = await prisma.confirmEmailToken.upsert({
      *   create: {
-     *     // ... data to create a ConfirmEmailTokens
+     *     // ... data to create a ConfirmEmailToken
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the ConfirmEmailTokens we want to update
+     *     // ... the filter for the ConfirmEmailToken we want to update
      *   }
      * })
      */
-    upsert<T extends ConfirmEmailTokensUpsertArgs>(args: SelectSubset<T, ConfirmEmailTokensUpsertArgs<ExtArgs>>): Prisma__ConfirmEmailTokensClient<$Result.GetResult<Prisma.$ConfirmEmailTokensPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends ConfirmEmailTokenUpsertArgs>(args: SelectSubset<T, ConfirmEmailTokenUpsertArgs<ExtArgs>>): Prisma__ConfirmEmailTokenClient<$Result.GetResult<Prisma.$ConfirmEmailTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
      * Count the number of ConfirmEmailTokens.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensCountArgs} args - Arguments to filter ConfirmEmailTokens to count.
+     * @param {ConfirmEmailTokenCountArgs} args - Arguments to filter ConfirmEmailTokens to count.
      * @example
      * // Count the number of ConfirmEmailTokens
-     * const count = await prisma.confirmEmailTokens.count({
+     * const count = await prisma.confirmEmailToken.count({
      *   where: {
      *     // ... the filter for the ConfirmEmailTokens we want to count
      *   }
      * })
     **/
-    count<T extends ConfirmEmailTokensCountArgs>(
-      args?: Subset<T, ConfirmEmailTokensCountArgs>,
+    count<T extends ConfirmEmailTokenCountArgs>(
+      args?: Subset<T, ConfirmEmailTokenCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ConfirmEmailTokensCountAggregateOutputType>
+          : GetScalarType<T['select'], ConfirmEmailTokenCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a ConfirmEmailTokens.
+     * Allows you to perform aggregations operations on a ConfirmEmailToken.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ConfirmEmailTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5075,13 +5203,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ConfirmEmailTokensAggregateArgs>(args: Subset<T, ConfirmEmailTokensAggregateArgs>): Prisma.PrismaPromise<GetConfirmEmailTokensAggregateType<T>>
+    aggregate<T extends ConfirmEmailTokenAggregateArgs>(args: Subset<T, ConfirmEmailTokenAggregateArgs>): Prisma.PrismaPromise<GetConfirmEmailTokenAggregateType<T>>
 
     /**
-     * Group by ConfirmEmailTokens.
+     * Group by ConfirmEmailToken.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ConfirmEmailTokensGroupByArgs} args - Group by arguments.
+     * @param {ConfirmEmailTokenGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5096,14 +5224,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ConfirmEmailTokensGroupByArgs,
+      T extends ConfirmEmailTokenGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ConfirmEmailTokensGroupByArgs['orderBy'] }
-        : { orderBy?: ConfirmEmailTokensGroupByArgs['orderBy'] },
+        ? { orderBy: ConfirmEmailTokenGroupByArgs['orderBy'] }
+        : { orderBy?: ConfirmEmailTokenGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5152,20 +5280,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ConfirmEmailTokensGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConfirmEmailTokensGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ConfirmEmailTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConfirmEmailTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the ConfirmEmailTokens model
+   * Fields of the ConfirmEmailToken model
    */
-  readonly fields: ConfirmEmailTokensFieldRefs;
+  readonly fields: ConfirmEmailTokenFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for ConfirmEmailTokens.
+   * The delegate class that acts as a "Promise-like" for ConfirmEmailToken.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ConfirmEmailTokensClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ConfirmEmailTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -5194,91 +5322,91 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the ConfirmEmailTokens model
+   * Fields of the ConfirmEmailToken model
    */
-  interface ConfirmEmailTokensFieldRefs {
-    readonly userId: FieldRef<"ConfirmEmailTokens", 'Int'>
-    readonly token: FieldRef<"ConfirmEmailTokens", 'String'>
+  interface ConfirmEmailTokenFieldRefs {
+    readonly userId: FieldRef<"ConfirmEmailToken", 'Int'>
+    readonly token: FieldRef<"ConfirmEmailToken", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * ConfirmEmailTokens findUnique
+   * ConfirmEmailToken findUnique
    */
-  export type ConfirmEmailTokensFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * Filter, which ConfirmEmailTokens to fetch.
+     * Filter, which ConfirmEmailToken to fetch.
      */
-    where: ConfirmEmailTokensWhereUniqueInput
+    where: ConfirmEmailTokenWhereUniqueInput
   }
 
   /**
-   * ConfirmEmailTokens findUniqueOrThrow
+   * ConfirmEmailToken findUniqueOrThrow
    */
-  export type ConfirmEmailTokensFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * Filter, which ConfirmEmailTokens to fetch.
+     * Filter, which ConfirmEmailToken to fetch.
      */
-    where: ConfirmEmailTokensWhereUniqueInput
+    where: ConfirmEmailTokenWhereUniqueInput
   }
 
   /**
-   * ConfirmEmailTokens findFirst
+   * ConfirmEmailToken findFirst
    */
-  export type ConfirmEmailTokensFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * Filter, which ConfirmEmailTokens to fetch.
+     * Filter, which ConfirmEmailToken to fetch.
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of ConfirmEmailTokens to fetch.
      */
-    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    orderBy?: ConfirmEmailTokenOrderByWithRelationInput | ConfirmEmailTokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for ConfirmEmailTokens.
      */
-    cursor?: ConfirmEmailTokensWhereUniqueInput
+    cursor?: ConfirmEmailTokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -5296,41 +5424,41 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of ConfirmEmailTokens.
      */
-    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+    distinct?: ConfirmEmailTokenScalarFieldEnum | ConfirmEmailTokenScalarFieldEnum[]
   }
 
   /**
-   * ConfirmEmailTokens findFirstOrThrow
+   * ConfirmEmailToken findFirstOrThrow
    */
-  export type ConfirmEmailTokensFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * Filter, which ConfirmEmailTokens to fetch.
+     * Filter, which ConfirmEmailToken to fetch.
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of ConfirmEmailTokens to fetch.
      */
-    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    orderBy?: ConfirmEmailTokenOrderByWithRelationInput | ConfirmEmailTokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for searching for ConfirmEmailTokens.
      */
-    cursor?: ConfirmEmailTokensWhereUniqueInput
+    cursor?: ConfirmEmailTokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -5348,41 +5476,41 @@ export namespace Prisma {
      * 
      * Filter by unique combinations of ConfirmEmailTokens.
      */
-    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+    distinct?: ConfirmEmailTokenScalarFieldEnum | ConfirmEmailTokenScalarFieldEnum[]
   }
 
   /**
-   * ConfirmEmailTokens findMany
+   * ConfirmEmailToken findMany
    */
-  export type ConfirmEmailTokensFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
      * Filter, which ConfirmEmailTokens to fetch.
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
      * Determine the order of ConfirmEmailTokens to fetch.
      */
-    orderBy?: ConfirmEmailTokensOrderByWithRelationInput | ConfirmEmailTokensOrderByWithRelationInput[]
+    orderBy?: ConfirmEmailTokenOrderByWithRelationInput | ConfirmEmailTokenOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the position for listing ConfirmEmailTokens.
      */
-    cursor?: ConfirmEmailTokensWhereUniqueInput
+    cursor?: ConfirmEmailTokenWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
@@ -5395,103 +5523,103 @@ export namespace Prisma {
      * Skip the first `n` ConfirmEmailTokens.
      */
     skip?: number
-    distinct?: ConfirmEmailTokensScalarFieldEnum | ConfirmEmailTokensScalarFieldEnum[]
+    distinct?: ConfirmEmailTokenScalarFieldEnum | ConfirmEmailTokenScalarFieldEnum[]
   }
 
   /**
-   * ConfirmEmailTokens create
+   * ConfirmEmailToken create
    */
-  export type ConfirmEmailTokensCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * The data needed to create a ConfirmEmailTokens.
+     * The data needed to create a ConfirmEmailToken.
      */
-    data: XOR<ConfirmEmailTokensCreateInput, ConfirmEmailTokensUncheckedCreateInput>
+    data: XOR<ConfirmEmailTokenCreateInput, ConfirmEmailTokenUncheckedCreateInput>
   }
 
   /**
-   * ConfirmEmailTokens createMany
+   * ConfirmEmailToken createMany
    */
-  export type ConfirmEmailTokensCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to create many ConfirmEmailTokens.
      */
-    data: ConfirmEmailTokensCreateManyInput | ConfirmEmailTokensCreateManyInput[]
+    data: ConfirmEmailTokenCreateManyInput | ConfirmEmailTokenCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * ConfirmEmailTokens createManyAndReturn
+   * ConfirmEmailToken createManyAndReturn
    */
-  export type ConfirmEmailTokensCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelectCreateManyAndReturn<ExtArgs> | null
+    select?: ConfirmEmailTokenSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * The data used to create many ConfirmEmailTokens.
      */
-    data: ConfirmEmailTokensCreateManyInput | ConfirmEmailTokensCreateManyInput[]
+    data: ConfirmEmailTokenCreateManyInput | ConfirmEmailTokenCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: ConfirmEmailTokenIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * ConfirmEmailTokens update
+   * ConfirmEmailToken update
    */
-  export type ConfirmEmailTokensUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * The data needed to update a ConfirmEmailTokens.
+     * The data needed to update a ConfirmEmailToken.
      */
-    data: XOR<ConfirmEmailTokensUpdateInput, ConfirmEmailTokensUncheckedUpdateInput>
+    data: XOR<ConfirmEmailTokenUpdateInput, ConfirmEmailTokenUncheckedUpdateInput>
     /**
-     * Choose, which ConfirmEmailTokens to update.
+     * Choose, which ConfirmEmailToken to update.
      */
-    where: ConfirmEmailTokensWhereUniqueInput
+    where: ConfirmEmailTokenWhereUniqueInput
   }
 
   /**
-   * ConfirmEmailTokens updateMany
+   * ConfirmEmailToken updateMany
    */
-  export type ConfirmEmailTokensUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The data used to update ConfirmEmailTokens.
      */
-    data: XOR<ConfirmEmailTokensUpdateManyMutationInput, ConfirmEmailTokensUncheckedUpdateManyInput>
+    data: XOR<ConfirmEmailTokenUpdateManyMutationInput, ConfirmEmailTokenUncheckedUpdateManyInput>
     /**
      * Filter which ConfirmEmailTokens to update
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * Limit how many ConfirmEmailTokens to update.
      */
@@ -5499,25 +5627,25 @@ export namespace Prisma {
   }
 
   /**
-   * ConfirmEmailTokens updateManyAndReturn
+   * ConfirmEmailToken updateManyAndReturn
    */
-  export type ConfirmEmailTokensUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: ConfirmEmailTokenSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * The data used to update ConfirmEmailTokens.
      */
-    data: XOR<ConfirmEmailTokensUpdateManyMutationInput, ConfirmEmailTokensUncheckedUpdateManyInput>
+    data: XOR<ConfirmEmailTokenUpdateManyMutationInput, ConfirmEmailTokenUncheckedUpdateManyInput>
     /**
      * Filter which ConfirmEmailTokens to update
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * Limit how many ConfirmEmailTokens to update.
      */
@@ -5525,69 +5653,69 @@ export namespace Prisma {
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: ConfirmEmailTokenIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * ConfirmEmailTokens upsert
+   * ConfirmEmailToken upsert
    */
-  export type ConfirmEmailTokensUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * The filter to search for the ConfirmEmailTokens to update in case it exists.
+     * The filter to search for the ConfirmEmailToken to update in case it exists.
      */
-    where: ConfirmEmailTokensWhereUniqueInput
+    where: ConfirmEmailTokenWhereUniqueInput
     /**
-     * In case the ConfirmEmailTokens found by the `where` argument doesn't exist, create a new ConfirmEmailTokens with this data.
+     * In case the ConfirmEmailToken found by the `where` argument doesn't exist, create a new ConfirmEmailToken with this data.
      */
-    create: XOR<ConfirmEmailTokensCreateInput, ConfirmEmailTokensUncheckedCreateInput>
+    create: XOR<ConfirmEmailTokenCreateInput, ConfirmEmailTokenUncheckedCreateInput>
     /**
-     * In case the ConfirmEmailTokens was found with the provided `where` argument, update it with this data.
+     * In case the ConfirmEmailToken was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ConfirmEmailTokensUpdateInput, ConfirmEmailTokensUncheckedUpdateInput>
+    update: XOR<ConfirmEmailTokenUpdateInput, ConfirmEmailTokenUncheckedUpdateInput>
   }
 
   /**
-   * ConfirmEmailTokens delete
+   * ConfirmEmailToken delete
    */
-  export type ConfirmEmailTokensDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
     /**
-     * Filter which ConfirmEmailTokens to delete.
+     * Filter which ConfirmEmailToken to delete.
      */
-    where: ConfirmEmailTokensWhereUniqueInput
+    where: ConfirmEmailTokenWhereUniqueInput
   }
 
   /**
-   * ConfirmEmailTokens deleteMany
+   * ConfirmEmailToken deleteMany
    */
-  export type ConfirmEmailTokensDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Filter which ConfirmEmailTokens to delete
      */
-    where?: ConfirmEmailTokensWhereInput
+    where?: ConfirmEmailTokenWhereInput
     /**
      * Limit how many ConfirmEmailTokens to delete.
      */
@@ -5595,21 +5723,1074 @@ export namespace Prisma {
   }
 
   /**
-   * ConfirmEmailTokens without action
+   * ConfirmEmailToken without action
    */
-  export type ConfirmEmailTokensDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ConfirmEmailTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ConfirmEmailTokens
+     * Select specific fields to fetch from the ConfirmEmailToken
      */
-    select?: ConfirmEmailTokensSelect<ExtArgs> | null
+    select?: ConfirmEmailTokenSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ConfirmEmailTokens
+     * Omit specific fields from the ConfirmEmailToken
      */
-    omit?: ConfirmEmailTokensOmit<ExtArgs> | null
+    omit?: ConfirmEmailTokenOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ConfirmEmailTokensInclude<ExtArgs> | null
+    include?: ConfirmEmailTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PasswordRecoveryToken
+   */
+
+  export type AggregatePasswordRecoveryToken = {
+    _count: PasswordRecoveryTokenCountAggregateOutputType | null
+    _avg: PasswordRecoveryTokenAvgAggregateOutputType | null
+    _sum: PasswordRecoveryTokenSumAggregateOutputType | null
+    _min: PasswordRecoveryTokenMinAggregateOutputType | null
+    _max: PasswordRecoveryTokenMaxAggregateOutputType | null
+  }
+
+  export type PasswordRecoveryTokenAvgAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type PasswordRecoveryTokenSumAggregateOutputType = {
+    userId: number | null
+  }
+
+  export type PasswordRecoveryTokenMinAggregateOutputType = {
+    userId: number | null
+    token: string | null
+  }
+
+  export type PasswordRecoveryTokenMaxAggregateOutputType = {
+    userId: number | null
+    token: string | null
+  }
+
+  export type PasswordRecoveryTokenCountAggregateOutputType = {
+    userId: number
+    token: number
+    _all: number
+  }
+
+
+  export type PasswordRecoveryTokenAvgAggregateInputType = {
+    userId?: true
+  }
+
+  export type PasswordRecoveryTokenSumAggregateInputType = {
+    userId?: true
+  }
+
+  export type PasswordRecoveryTokenMinAggregateInputType = {
+    userId?: true
+    token?: true
+  }
+
+  export type PasswordRecoveryTokenMaxAggregateInputType = {
+    userId?: true
+    token?: true
+  }
+
+  export type PasswordRecoveryTokenCountAggregateInputType = {
+    userId?: true
+    token?: true
+    _all?: true
+  }
+
+  export type PasswordRecoveryTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PasswordRecoveryToken to aggregate.
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordRecoveryTokens to fetch.
+     */
+    orderBy?: PasswordRecoveryTokenOrderByWithRelationInput | PasswordRecoveryTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PasswordRecoveryTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordRecoveryTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordRecoveryTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PasswordRecoveryTokens
+    **/
+    _count?: true | PasswordRecoveryTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PasswordRecoveryTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PasswordRecoveryTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PasswordRecoveryTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PasswordRecoveryTokenMaxAggregateInputType
+  }
+
+  export type GetPasswordRecoveryTokenAggregateType<T extends PasswordRecoveryTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregatePasswordRecoveryToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePasswordRecoveryToken[P]>
+      : GetScalarType<T[P], AggregatePasswordRecoveryToken[P]>
+  }
+
+
+
+
+  export type PasswordRecoveryTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PasswordRecoveryTokenWhereInput
+    orderBy?: PasswordRecoveryTokenOrderByWithAggregationInput | PasswordRecoveryTokenOrderByWithAggregationInput[]
+    by: PasswordRecoveryTokenScalarFieldEnum[] | PasswordRecoveryTokenScalarFieldEnum
+    having?: PasswordRecoveryTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PasswordRecoveryTokenCountAggregateInputType | true
+    _avg?: PasswordRecoveryTokenAvgAggregateInputType
+    _sum?: PasswordRecoveryTokenSumAggregateInputType
+    _min?: PasswordRecoveryTokenMinAggregateInputType
+    _max?: PasswordRecoveryTokenMaxAggregateInputType
+  }
+
+  export type PasswordRecoveryTokenGroupByOutputType = {
+    userId: number
+    token: string
+    _count: PasswordRecoveryTokenCountAggregateOutputType | null
+    _avg: PasswordRecoveryTokenAvgAggregateOutputType | null
+    _sum: PasswordRecoveryTokenSumAggregateOutputType | null
+    _min: PasswordRecoveryTokenMinAggregateOutputType | null
+    _max: PasswordRecoveryTokenMaxAggregateOutputType | null
+  }
+
+  type GetPasswordRecoveryTokenGroupByPayload<T extends PasswordRecoveryTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PasswordRecoveryTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PasswordRecoveryTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PasswordRecoveryTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], PasswordRecoveryTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PasswordRecoveryTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    token?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["passwordRecoveryToken"]>
+
+  export type PasswordRecoveryTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    token?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["passwordRecoveryToken"]>
+
+  export type PasswordRecoveryTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    token?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["passwordRecoveryToken"]>
+
+  export type PasswordRecoveryTokenSelectScalar = {
+    userId?: boolean
+    token?: boolean
+  }
+
+  export type PasswordRecoveryTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "token", ExtArgs["result"]["passwordRecoveryToken"]>
+  export type PasswordRecoveryTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PasswordRecoveryTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PasswordRecoveryTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PasswordRecoveryTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PasswordRecoveryToken"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      userId: number
+      token: string
+    }, ExtArgs["result"]["passwordRecoveryToken"]>
+    composites: {}
+  }
+
+  type PasswordRecoveryTokenGetPayload<S extends boolean | null | undefined | PasswordRecoveryTokenDefaultArgs> = $Result.GetResult<Prisma.$PasswordRecoveryTokenPayload, S>
+
+  type PasswordRecoveryTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PasswordRecoveryTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PasswordRecoveryTokenCountAggregateInputType | true
+    }
+
+  export interface PasswordRecoveryTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PasswordRecoveryToken'], meta: { name: 'PasswordRecoveryToken' } }
+    /**
+     * Find zero or one PasswordRecoveryToken that matches the filter.
+     * @param {PasswordRecoveryTokenFindUniqueArgs} args - Arguments to find a PasswordRecoveryToken
+     * @example
+     * // Get one PasswordRecoveryToken
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PasswordRecoveryTokenFindUniqueArgs>(args: SelectSubset<T, PasswordRecoveryTokenFindUniqueArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PasswordRecoveryToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PasswordRecoveryTokenFindUniqueOrThrowArgs} args - Arguments to find a PasswordRecoveryToken
+     * @example
+     * // Get one PasswordRecoveryToken
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PasswordRecoveryTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, PasswordRecoveryTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PasswordRecoveryToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenFindFirstArgs} args - Arguments to find a PasswordRecoveryToken
+     * @example
+     * // Get one PasswordRecoveryToken
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PasswordRecoveryTokenFindFirstArgs>(args?: SelectSubset<T, PasswordRecoveryTokenFindFirstArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PasswordRecoveryToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenFindFirstOrThrowArgs} args - Arguments to find a PasswordRecoveryToken
+     * @example
+     * // Get one PasswordRecoveryToken
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PasswordRecoveryTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, PasswordRecoveryTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PasswordRecoveryTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PasswordRecoveryTokens
+     * const passwordRecoveryTokens = await prisma.passwordRecoveryToken.findMany()
+     * 
+     * // Get first 10 PasswordRecoveryTokens
+     * const passwordRecoveryTokens = await prisma.passwordRecoveryToken.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const passwordRecoveryTokenWithUserIdOnly = await prisma.passwordRecoveryToken.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends PasswordRecoveryTokenFindManyArgs>(args?: SelectSubset<T, PasswordRecoveryTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PasswordRecoveryToken.
+     * @param {PasswordRecoveryTokenCreateArgs} args - Arguments to create a PasswordRecoveryToken.
+     * @example
+     * // Create one PasswordRecoveryToken
+     * const PasswordRecoveryToken = await prisma.passwordRecoveryToken.create({
+     *   data: {
+     *     // ... data to create a PasswordRecoveryToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends PasswordRecoveryTokenCreateArgs>(args: SelectSubset<T, PasswordRecoveryTokenCreateArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PasswordRecoveryTokens.
+     * @param {PasswordRecoveryTokenCreateManyArgs} args - Arguments to create many PasswordRecoveryTokens.
+     * @example
+     * // Create many PasswordRecoveryTokens
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PasswordRecoveryTokenCreateManyArgs>(args?: SelectSubset<T, PasswordRecoveryTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PasswordRecoveryTokens and returns the data saved in the database.
+     * @param {PasswordRecoveryTokenCreateManyAndReturnArgs} args - Arguments to create many PasswordRecoveryTokens.
+     * @example
+     * // Create many PasswordRecoveryTokens
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PasswordRecoveryTokens and only return the `userId`
+     * const passwordRecoveryTokenWithUserIdOnly = await prisma.passwordRecoveryToken.createManyAndReturn({
+     *   select: { userId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PasswordRecoveryTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, PasswordRecoveryTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PasswordRecoveryToken.
+     * @param {PasswordRecoveryTokenDeleteArgs} args - Arguments to delete one PasswordRecoveryToken.
+     * @example
+     * // Delete one PasswordRecoveryToken
+     * const PasswordRecoveryToken = await prisma.passwordRecoveryToken.delete({
+     *   where: {
+     *     // ... filter to delete one PasswordRecoveryToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PasswordRecoveryTokenDeleteArgs>(args: SelectSubset<T, PasswordRecoveryTokenDeleteArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PasswordRecoveryToken.
+     * @param {PasswordRecoveryTokenUpdateArgs} args - Arguments to update one PasswordRecoveryToken.
+     * @example
+     * // Update one PasswordRecoveryToken
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PasswordRecoveryTokenUpdateArgs>(args: SelectSubset<T, PasswordRecoveryTokenUpdateArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PasswordRecoveryTokens.
+     * @param {PasswordRecoveryTokenDeleteManyArgs} args - Arguments to filter PasswordRecoveryTokens to delete.
+     * @example
+     * // Delete a few PasswordRecoveryTokens
+     * const { count } = await prisma.passwordRecoveryToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PasswordRecoveryTokenDeleteManyArgs>(args?: SelectSubset<T, PasswordRecoveryTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PasswordRecoveryTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PasswordRecoveryTokens
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PasswordRecoveryTokenUpdateManyArgs>(args: SelectSubset<T, PasswordRecoveryTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PasswordRecoveryTokens and returns the data updated in the database.
+     * @param {PasswordRecoveryTokenUpdateManyAndReturnArgs} args - Arguments to update many PasswordRecoveryTokens.
+     * @example
+     * // Update many PasswordRecoveryTokens
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PasswordRecoveryTokens and only return the `userId`
+     * const passwordRecoveryTokenWithUserIdOnly = await prisma.passwordRecoveryToken.updateManyAndReturn({
+     *   select: { userId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PasswordRecoveryTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, PasswordRecoveryTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PasswordRecoveryToken.
+     * @param {PasswordRecoveryTokenUpsertArgs} args - Arguments to update or create a PasswordRecoveryToken.
+     * @example
+     * // Update or create a PasswordRecoveryToken
+     * const passwordRecoveryToken = await prisma.passwordRecoveryToken.upsert({
+     *   create: {
+     *     // ... data to create a PasswordRecoveryToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PasswordRecoveryToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PasswordRecoveryTokenUpsertArgs>(args: SelectSubset<T, PasswordRecoveryTokenUpsertArgs<ExtArgs>>): Prisma__PasswordRecoveryTokenClient<$Result.GetResult<Prisma.$PasswordRecoveryTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PasswordRecoveryTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenCountArgs} args - Arguments to filter PasswordRecoveryTokens to count.
+     * @example
+     * // Count the number of PasswordRecoveryTokens
+     * const count = await prisma.passwordRecoveryToken.count({
+     *   where: {
+     *     // ... the filter for the PasswordRecoveryTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends PasswordRecoveryTokenCountArgs>(
+      args?: Subset<T, PasswordRecoveryTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PasswordRecoveryTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PasswordRecoveryToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PasswordRecoveryTokenAggregateArgs>(args: Subset<T, PasswordRecoveryTokenAggregateArgs>): Prisma.PrismaPromise<GetPasswordRecoveryTokenAggregateType<T>>
+
+    /**
+     * Group by PasswordRecoveryToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordRecoveryTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PasswordRecoveryTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PasswordRecoveryTokenGroupByArgs['orderBy'] }
+        : { orderBy?: PasswordRecoveryTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PasswordRecoveryTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPasswordRecoveryTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PasswordRecoveryToken model
+   */
+  readonly fields: PasswordRecoveryTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PasswordRecoveryToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PasswordRecoveryTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PasswordRecoveryToken model
+   */
+  interface PasswordRecoveryTokenFieldRefs {
+    readonly userId: FieldRef<"PasswordRecoveryToken", 'Int'>
+    readonly token: FieldRef<"PasswordRecoveryToken", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PasswordRecoveryToken findUnique
+   */
+  export type PasswordRecoveryTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordRecoveryToken to fetch.
+     */
+    where: PasswordRecoveryTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordRecoveryToken findUniqueOrThrow
+   */
+  export type PasswordRecoveryTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordRecoveryToken to fetch.
+     */
+    where: PasswordRecoveryTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordRecoveryToken findFirst
+   */
+  export type PasswordRecoveryTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordRecoveryToken to fetch.
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordRecoveryTokens to fetch.
+     */
+    orderBy?: PasswordRecoveryTokenOrderByWithRelationInput | PasswordRecoveryTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PasswordRecoveryTokens.
+     */
+    cursor?: PasswordRecoveryTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordRecoveryTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordRecoveryTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PasswordRecoveryTokens.
+     */
+    distinct?: PasswordRecoveryTokenScalarFieldEnum | PasswordRecoveryTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PasswordRecoveryToken findFirstOrThrow
+   */
+  export type PasswordRecoveryTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordRecoveryToken to fetch.
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordRecoveryTokens to fetch.
+     */
+    orderBy?: PasswordRecoveryTokenOrderByWithRelationInput | PasswordRecoveryTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PasswordRecoveryTokens.
+     */
+    cursor?: PasswordRecoveryTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordRecoveryTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordRecoveryTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PasswordRecoveryTokens.
+     */
+    distinct?: PasswordRecoveryTokenScalarFieldEnum | PasswordRecoveryTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PasswordRecoveryToken findMany
+   */
+  export type PasswordRecoveryTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordRecoveryTokens to fetch.
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordRecoveryTokens to fetch.
+     */
+    orderBy?: PasswordRecoveryTokenOrderByWithRelationInput | PasswordRecoveryTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PasswordRecoveryTokens.
+     */
+    cursor?: PasswordRecoveryTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordRecoveryTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordRecoveryTokens.
+     */
+    skip?: number
+    distinct?: PasswordRecoveryTokenScalarFieldEnum | PasswordRecoveryTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PasswordRecoveryToken create
+   */
+  export type PasswordRecoveryTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PasswordRecoveryToken.
+     */
+    data: XOR<PasswordRecoveryTokenCreateInput, PasswordRecoveryTokenUncheckedCreateInput>
+  }
+
+  /**
+   * PasswordRecoveryToken createMany
+   */
+  export type PasswordRecoveryTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PasswordRecoveryTokens.
+     */
+    data: PasswordRecoveryTokenCreateManyInput | PasswordRecoveryTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PasswordRecoveryToken createManyAndReturn
+   */
+  export type PasswordRecoveryTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many PasswordRecoveryTokens.
+     */
+    data: PasswordRecoveryTokenCreateManyInput | PasswordRecoveryTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PasswordRecoveryToken update
+   */
+  export type PasswordRecoveryTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PasswordRecoveryToken.
+     */
+    data: XOR<PasswordRecoveryTokenUpdateInput, PasswordRecoveryTokenUncheckedUpdateInput>
+    /**
+     * Choose, which PasswordRecoveryToken to update.
+     */
+    where: PasswordRecoveryTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordRecoveryToken updateMany
+   */
+  export type PasswordRecoveryTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PasswordRecoveryTokens.
+     */
+    data: XOR<PasswordRecoveryTokenUpdateManyMutationInput, PasswordRecoveryTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which PasswordRecoveryTokens to update
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * Limit how many PasswordRecoveryTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PasswordRecoveryToken updateManyAndReturn
+   */
+  export type PasswordRecoveryTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update PasswordRecoveryTokens.
+     */
+    data: XOR<PasswordRecoveryTokenUpdateManyMutationInput, PasswordRecoveryTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which PasswordRecoveryTokens to update
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * Limit how many PasswordRecoveryTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PasswordRecoveryToken upsert
+   */
+  export type PasswordRecoveryTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PasswordRecoveryToken to update in case it exists.
+     */
+    where: PasswordRecoveryTokenWhereUniqueInput
+    /**
+     * In case the PasswordRecoveryToken found by the `where` argument doesn't exist, create a new PasswordRecoveryToken with this data.
+     */
+    create: XOR<PasswordRecoveryTokenCreateInput, PasswordRecoveryTokenUncheckedCreateInput>
+    /**
+     * In case the PasswordRecoveryToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PasswordRecoveryTokenUpdateInput, PasswordRecoveryTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * PasswordRecoveryToken delete
+   */
+  export type PasswordRecoveryTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
+    /**
+     * Filter which PasswordRecoveryToken to delete.
+     */
+    where: PasswordRecoveryTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordRecoveryToken deleteMany
+   */
+  export type PasswordRecoveryTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PasswordRecoveryTokens to delete
+     */
+    where?: PasswordRecoveryTokenWhereInput
+    /**
+     * Limit how many PasswordRecoveryTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PasswordRecoveryToken without action
+   */
+  export type PasswordRecoveryTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordRecoveryToken
+     */
+    select?: PasswordRecoveryTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordRecoveryToken
+     */
+    omit?: PasswordRecoveryTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordRecoveryTokenInclude<ExtArgs> | null
   }
 
 
@@ -5660,12 +6841,20 @@ export namespace Prisma {
   export type PurchaseScalarFieldEnum = (typeof PurchaseScalarFieldEnum)[keyof typeof PurchaseScalarFieldEnum]
 
 
-  export const ConfirmEmailTokensScalarFieldEnum: {
+  export const ConfirmEmailTokenScalarFieldEnum: {
     userId: 'userId',
     token: 'token'
   };
 
-  export type ConfirmEmailTokensScalarFieldEnum = (typeof ConfirmEmailTokensScalarFieldEnum)[keyof typeof ConfirmEmailTokensScalarFieldEnum]
+  export type ConfirmEmailTokenScalarFieldEnum = (typeof ConfirmEmailTokenScalarFieldEnum)[keyof typeof ConfirmEmailTokenScalarFieldEnum]
+
+
+  export const PasswordRecoveryTokenScalarFieldEnum: {
+    userId: 'userId',
+    token: 'token'
+  };
+
+  export type PasswordRecoveryTokenScalarFieldEnum = (typeof PasswordRecoveryTokenScalarFieldEnum)[keyof typeof PasswordRecoveryTokenScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5765,7 +6954,8 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     verified?: BoolFilter<"User"> | boolean
     purchases?: PurchaseListRelationFilter
-    token?: ConfirmEmailTokensListRelationFilter
+    confirmEmailToken?: ConfirmEmailTokenListRelationFilter
+    recoveryPasswordToken?: PasswordRecoveryTokenListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5775,7 +6965,8 @@ export namespace Prisma {
     password?: SortOrder
     verified?: SortOrder
     purchases?: PurchaseOrderByRelationAggregateInput
-    token?: ConfirmEmailTokensOrderByRelationAggregateInput
+    confirmEmailToken?: ConfirmEmailTokenOrderByRelationAggregateInput
+    recoveryPasswordToken?: PasswordRecoveryTokenOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5788,7 +6979,8 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     verified?: BoolFilter<"User"> | boolean
     purchases?: PurchaseListRelationFilter
-    token?: ConfirmEmailTokensListRelationFilter
+    confirmEmailToken?: ConfirmEmailTokenListRelationFilter
+    recoveryPasswordToken?: PasswordRecoveryTokenListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -5932,46 +7124,88 @@ export namespace Prisma {
     categoryId?: IntWithAggregatesFilter<"Purchase"> | number
   }
 
-  export type ConfirmEmailTokensWhereInput = {
-    AND?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
-    OR?: ConfirmEmailTokensWhereInput[]
-    NOT?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
-    userId?: IntFilter<"ConfirmEmailTokens"> | number
-    token?: StringFilter<"ConfirmEmailTokens"> | string
+  export type ConfirmEmailTokenWhereInput = {
+    AND?: ConfirmEmailTokenWhereInput | ConfirmEmailTokenWhereInput[]
+    OR?: ConfirmEmailTokenWhereInput[]
+    NOT?: ConfirmEmailTokenWhereInput | ConfirmEmailTokenWhereInput[]
+    userId?: IntFilter<"ConfirmEmailToken"> | number
+    token?: StringFilter<"ConfirmEmailToken"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type ConfirmEmailTokensOrderByWithRelationInput = {
+  export type ConfirmEmailTokenOrderByWithRelationInput = {
     userId?: SortOrder
     token?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type ConfirmEmailTokensWhereUniqueInput = Prisma.AtLeast<{
+  export type ConfirmEmailTokenWhereUniqueInput = Prisma.AtLeast<{
     userId?: number
     token?: string
-    AND?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
-    OR?: ConfirmEmailTokensWhereInput[]
-    NOT?: ConfirmEmailTokensWhereInput | ConfirmEmailTokensWhereInput[]
+    AND?: ConfirmEmailTokenWhereInput | ConfirmEmailTokenWhereInput[]
+    OR?: ConfirmEmailTokenWhereInput[]
+    NOT?: ConfirmEmailTokenWhereInput | ConfirmEmailTokenWhereInput[]
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "userId" | "token">
 
-  export type ConfirmEmailTokensOrderByWithAggregationInput = {
+  export type ConfirmEmailTokenOrderByWithAggregationInput = {
     userId?: SortOrder
     token?: SortOrder
-    _count?: ConfirmEmailTokensCountOrderByAggregateInput
-    _avg?: ConfirmEmailTokensAvgOrderByAggregateInput
-    _max?: ConfirmEmailTokensMaxOrderByAggregateInput
-    _min?: ConfirmEmailTokensMinOrderByAggregateInput
-    _sum?: ConfirmEmailTokensSumOrderByAggregateInput
+    _count?: ConfirmEmailTokenCountOrderByAggregateInput
+    _avg?: ConfirmEmailTokenAvgOrderByAggregateInput
+    _max?: ConfirmEmailTokenMaxOrderByAggregateInput
+    _min?: ConfirmEmailTokenMinOrderByAggregateInput
+    _sum?: ConfirmEmailTokenSumOrderByAggregateInput
   }
 
-  export type ConfirmEmailTokensScalarWhereWithAggregatesInput = {
-    AND?: ConfirmEmailTokensScalarWhereWithAggregatesInput | ConfirmEmailTokensScalarWhereWithAggregatesInput[]
-    OR?: ConfirmEmailTokensScalarWhereWithAggregatesInput[]
-    NOT?: ConfirmEmailTokensScalarWhereWithAggregatesInput | ConfirmEmailTokensScalarWhereWithAggregatesInput[]
-    userId?: IntWithAggregatesFilter<"ConfirmEmailTokens"> | number
-    token?: StringWithAggregatesFilter<"ConfirmEmailTokens"> | string
+  export type ConfirmEmailTokenScalarWhereWithAggregatesInput = {
+    AND?: ConfirmEmailTokenScalarWhereWithAggregatesInput | ConfirmEmailTokenScalarWhereWithAggregatesInput[]
+    OR?: ConfirmEmailTokenScalarWhereWithAggregatesInput[]
+    NOT?: ConfirmEmailTokenScalarWhereWithAggregatesInput | ConfirmEmailTokenScalarWhereWithAggregatesInput[]
+    userId?: IntWithAggregatesFilter<"ConfirmEmailToken"> | number
+    token?: StringWithAggregatesFilter<"ConfirmEmailToken"> | string
+  }
+
+  export type PasswordRecoveryTokenWhereInput = {
+    AND?: PasswordRecoveryTokenWhereInput | PasswordRecoveryTokenWhereInput[]
+    OR?: PasswordRecoveryTokenWhereInput[]
+    NOT?: PasswordRecoveryTokenWhereInput | PasswordRecoveryTokenWhereInput[]
+    userId?: IntFilter<"PasswordRecoveryToken"> | number
+    token?: StringFilter<"PasswordRecoveryToken"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PasswordRecoveryTokenOrderByWithRelationInput = {
+    userId?: SortOrder
+    token?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PasswordRecoveryTokenWhereUniqueInput = Prisma.AtLeast<{
+    userId?: number
+    token?: string
+    AND?: PasswordRecoveryTokenWhereInput | PasswordRecoveryTokenWhereInput[]
+    OR?: PasswordRecoveryTokenWhereInput[]
+    NOT?: PasswordRecoveryTokenWhereInput | PasswordRecoveryTokenWhereInput[]
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "userId" | "token">
+
+  export type PasswordRecoveryTokenOrderByWithAggregationInput = {
+    userId?: SortOrder
+    token?: SortOrder
+    _count?: PasswordRecoveryTokenCountOrderByAggregateInput
+    _avg?: PasswordRecoveryTokenAvgOrderByAggregateInput
+    _max?: PasswordRecoveryTokenMaxOrderByAggregateInput
+    _min?: PasswordRecoveryTokenMinOrderByAggregateInput
+    _sum?: PasswordRecoveryTokenSumOrderByAggregateInput
+  }
+
+  export type PasswordRecoveryTokenScalarWhereWithAggregatesInput = {
+    AND?: PasswordRecoveryTokenScalarWhereWithAggregatesInput | PasswordRecoveryTokenScalarWhereWithAggregatesInput[]
+    OR?: PasswordRecoveryTokenScalarWhereWithAggregatesInput[]
+    NOT?: PasswordRecoveryTokenScalarWhereWithAggregatesInput | PasswordRecoveryTokenScalarWhereWithAggregatesInput[]
+    userId?: IntWithAggregatesFilter<"PasswordRecoveryToken"> | number
+    token?: StringWithAggregatesFilter<"PasswordRecoveryToken"> | string
   }
 
   export type UserCreateInput = {
@@ -5980,7 +7214,8 @@ export namespace Prisma {
     password: string
     verified?: boolean
     purchases?: PurchaseCreateNestedManyWithoutCreatorInput
-    token?: ConfirmEmailTokensCreateNestedManyWithoutUserInput
+    confirmEmailToken?: ConfirmEmailTokenCreateNestedManyWithoutUserInput
+    recoveryPasswordToken?: PasswordRecoveryTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -5990,7 +7225,8 @@ export namespace Prisma {
     password: string
     verified?: boolean
     purchases?: PurchaseUncheckedCreateNestedManyWithoutCreatorInput
-    token?: ConfirmEmailTokensUncheckedCreateNestedManyWithoutUserInput
+    confirmEmailToken?: ConfirmEmailTokenUncheckedCreateNestedManyWithoutUserInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -5999,7 +7235,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
     purchases?: PurchaseUpdateManyWithoutCreatorNestedInput
-    token?: ConfirmEmailTokensUpdateManyWithoutUserNestedInput
+    confirmEmailToken?: ConfirmEmailTokenUpdateManyWithoutUserNestedInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6009,7 +7246,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
     purchases?: PurchaseUncheckedUpdateManyWithoutCreatorNestedInput
-    token?: ConfirmEmailTokensUncheckedUpdateManyWithoutUserNestedInput
+    confirmEmailToken?: ConfirmEmailTokenUncheckedUpdateManyWithoutUserNestedInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6143,36 +7381,70 @@ export namespace Prisma {
     categoryId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ConfirmEmailTokensCreateInput = {
+  export type ConfirmEmailTokenCreateInput = {
     token: string
-    user: UserCreateNestedOneWithoutTokenInput
+    user: UserCreateNestedOneWithoutConfirmEmailTokenInput
   }
 
-  export type ConfirmEmailTokensUncheckedCreateInput = {
+  export type ConfirmEmailTokenUncheckedCreateInput = {
     userId: number
     token: string
   }
 
-  export type ConfirmEmailTokensUpdateInput = {
+  export type ConfirmEmailTokenUpdateInput = {
     token?: StringFieldUpdateOperationsInput | string
-    user?: UserUpdateOneRequiredWithoutTokenNestedInput
+    user?: UserUpdateOneRequiredWithoutConfirmEmailTokenNestedInput
   }
 
-  export type ConfirmEmailTokensUncheckedUpdateInput = {
+  export type ConfirmEmailTokenUncheckedUpdateInput = {
     userId?: IntFieldUpdateOperationsInput | number
     token?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ConfirmEmailTokensCreateManyInput = {
+  export type ConfirmEmailTokenCreateManyInput = {
     userId: number
     token: string
   }
 
-  export type ConfirmEmailTokensUpdateManyMutationInput = {
+  export type ConfirmEmailTokenUpdateManyMutationInput = {
     token?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ConfirmEmailTokensUncheckedUpdateManyInput = {
+  export type ConfirmEmailTokenUncheckedUpdateManyInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PasswordRecoveryTokenCreateInput = {
+    token: string
+    user: UserCreateNestedOneWithoutRecoveryPasswordTokenInput
+  }
+
+  export type PasswordRecoveryTokenUncheckedCreateInput = {
+    userId: number
+    token: string
+  }
+
+  export type PasswordRecoveryTokenUpdateInput = {
+    token?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutRecoveryPasswordTokenNestedInput
+  }
+
+  export type PasswordRecoveryTokenUncheckedUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PasswordRecoveryTokenCreateManyInput = {
+    userId: number
+    token: string
+  }
+
+  export type PasswordRecoveryTokenUpdateManyMutationInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PasswordRecoveryTokenUncheckedUpdateManyInput = {
     userId?: IntFieldUpdateOperationsInput | number
     token?: StringFieldUpdateOperationsInput | string
   }
@@ -6225,17 +7497,27 @@ export namespace Prisma {
     none?: PurchaseWhereInput
   }
 
-  export type ConfirmEmailTokensListRelationFilter = {
-    every?: ConfirmEmailTokensWhereInput
-    some?: ConfirmEmailTokensWhereInput
-    none?: ConfirmEmailTokensWhereInput
+  export type ConfirmEmailTokenListRelationFilter = {
+    every?: ConfirmEmailTokenWhereInput
+    some?: ConfirmEmailTokenWhereInput
+    none?: ConfirmEmailTokenWhereInput
+  }
+
+  export type PasswordRecoveryTokenListRelationFilter = {
+    every?: PasswordRecoveryTokenWhereInput
+    some?: PasswordRecoveryTokenWhereInput
+    none?: PasswordRecoveryTokenWhereInput
   }
 
   export type PurchaseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ConfirmEmailTokensOrderByRelationAggregateInput = {
+  export type ConfirmEmailTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PasswordRecoveryTokenOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6434,26 +7716,49 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type ConfirmEmailTokensCountOrderByAggregateInput = {
+  export type ConfirmEmailTokenCountOrderByAggregateInput = {
     userId?: SortOrder
     token?: SortOrder
   }
 
-  export type ConfirmEmailTokensAvgOrderByAggregateInput = {
+  export type ConfirmEmailTokenAvgOrderByAggregateInput = {
     userId?: SortOrder
   }
 
-  export type ConfirmEmailTokensMaxOrderByAggregateInput = {
-    userId?: SortOrder
-    token?: SortOrder
-  }
-
-  export type ConfirmEmailTokensMinOrderByAggregateInput = {
+  export type ConfirmEmailTokenMaxOrderByAggregateInput = {
     userId?: SortOrder
     token?: SortOrder
   }
 
-  export type ConfirmEmailTokensSumOrderByAggregateInput = {
+  export type ConfirmEmailTokenMinOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type ConfirmEmailTokenSumOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
+  export type PasswordRecoveryTokenCountOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type PasswordRecoveryTokenAvgOrderByAggregateInput = {
+    userId?: SortOrder
+  }
+
+  export type PasswordRecoveryTokenMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type PasswordRecoveryTokenMinOrderByAggregateInput = {
+    userId?: SortOrder
+    token?: SortOrder
+  }
+
+  export type PasswordRecoveryTokenSumOrderByAggregateInput = {
     userId?: SortOrder
   }
 
@@ -6464,11 +7769,18 @@ export namespace Prisma {
     connect?: PurchaseWhereUniqueInput | PurchaseWhereUniqueInput[]
   }
 
-  export type ConfirmEmailTokensCreateNestedManyWithoutUserInput = {
-    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
-    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
-    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+  export type ConfirmEmailTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConfirmEmailTokenCreateWithoutUserInput, ConfirmEmailTokenUncheckedCreateWithoutUserInput> | ConfirmEmailTokenCreateWithoutUserInput[] | ConfirmEmailTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokenCreateOrConnectWithoutUserInput | ConfirmEmailTokenCreateOrConnectWithoutUserInput[]
+    createMany?: ConfirmEmailTokenCreateManyUserInputEnvelope
+    connect?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+  }
+
+  export type PasswordRecoveryTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<PasswordRecoveryTokenCreateWithoutUserInput, PasswordRecoveryTokenUncheckedCreateWithoutUserInput> | PasswordRecoveryTokenCreateWithoutUserInput[] | PasswordRecoveryTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordRecoveryTokenCreateOrConnectWithoutUserInput | PasswordRecoveryTokenCreateOrConnectWithoutUserInput[]
+    createMany?: PasswordRecoveryTokenCreateManyUserInputEnvelope
+    connect?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
   }
 
   export type PurchaseUncheckedCreateNestedManyWithoutCreatorInput = {
@@ -6478,11 +7790,18 @@ export namespace Prisma {
     connect?: PurchaseWhereUniqueInput | PurchaseWhereUniqueInput[]
   }
 
-  export type ConfirmEmailTokensUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
-    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
-    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
+  export type ConfirmEmailTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConfirmEmailTokenCreateWithoutUserInput, ConfirmEmailTokenUncheckedCreateWithoutUserInput> | ConfirmEmailTokenCreateWithoutUserInput[] | ConfirmEmailTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokenCreateOrConnectWithoutUserInput | ConfirmEmailTokenCreateOrConnectWithoutUserInput[]
+    createMany?: ConfirmEmailTokenCreateManyUserInputEnvelope
+    connect?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+  }
+
+  export type PasswordRecoveryTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PasswordRecoveryTokenCreateWithoutUserInput, PasswordRecoveryTokenUncheckedCreateWithoutUserInput> | PasswordRecoveryTokenCreateWithoutUserInput[] | PasswordRecoveryTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordRecoveryTokenCreateOrConnectWithoutUserInput | PasswordRecoveryTokenCreateOrConnectWithoutUserInput[]
+    createMany?: PasswordRecoveryTokenCreateManyUserInputEnvelope
+    connect?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6511,18 +7830,32 @@ export namespace Prisma {
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
   }
 
-  export type ConfirmEmailTokensUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
-    upsert?: ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
-    set?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    disconnect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    delete?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    update?: ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput | ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
+  export type ConfirmEmailTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConfirmEmailTokenCreateWithoutUserInput, ConfirmEmailTokenUncheckedCreateWithoutUserInput> | ConfirmEmailTokenCreateWithoutUserInput[] | ConfirmEmailTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokenCreateOrConnectWithoutUserInput | ConfirmEmailTokenCreateOrConnectWithoutUserInput[]
+    upsert?: ConfirmEmailTokenUpsertWithWhereUniqueWithoutUserInput | ConfirmEmailTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConfirmEmailTokenCreateManyUserInputEnvelope
+    set?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    disconnect?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    delete?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    connect?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    update?: ConfirmEmailTokenUpdateWithWhereUniqueWithoutUserInput | ConfirmEmailTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConfirmEmailTokenUpdateManyWithWhereWithoutUserInput | ConfirmEmailTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConfirmEmailTokenScalarWhereInput | ConfirmEmailTokenScalarWhereInput[]
+  }
+
+  export type PasswordRecoveryTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PasswordRecoveryTokenCreateWithoutUserInput, PasswordRecoveryTokenUncheckedCreateWithoutUserInput> | PasswordRecoveryTokenCreateWithoutUserInput[] | PasswordRecoveryTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordRecoveryTokenCreateOrConnectWithoutUserInput | PasswordRecoveryTokenCreateOrConnectWithoutUserInput[]
+    upsert?: PasswordRecoveryTokenUpsertWithWhereUniqueWithoutUserInput | PasswordRecoveryTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PasswordRecoveryTokenCreateManyUserInputEnvelope
+    set?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    disconnect?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    delete?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    connect?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    update?: PasswordRecoveryTokenUpdateWithWhereUniqueWithoutUserInput | PasswordRecoveryTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PasswordRecoveryTokenUpdateManyWithWhereWithoutUserInput | PasswordRecoveryTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PasswordRecoveryTokenScalarWhereInput | PasswordRecoveryTokenScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -6547,18 +7880,32 @@ export namespace Prisma {
     deleteMany?: PurchaseScalarWhereInput | PurchaseScalarWhereInput[]
   }
 
-  export type ConfirmEmailTokensUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput> | ConfirmEmailTokensCreateWithoutUserInput[] | ConfirmEmailTokensUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConfirmEmailTokensCreateOrConnectWithoutUserInput | ConfirmEmailTokensCreateOrConnectWithoutUserInput[]
-    upsert?: ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ConfirmEmailTokensCreateManyUserInputEnvelope
-    set?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    disconnect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    delete?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    connect?: ConfirmEmailTokensWhereUniqueInput | ConfirmEmailTokensWhereUniqueInput[]
-    update?: ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput | ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput | ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
+  export type ConfirmEmailTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConfirmEmailTokenCreateWithoutUserInput, ConfirmEmailTokenUncheckedCreateWithoutUserInput> | ConfirmEmailTokenCreateWithoutUserInput[] | ConfirmEmailTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConfirmEmailTokenCreateOrConnectWithoutUserInput | ConfirmEmailTokenCreateOrConnectWithoutUserInput[]
+    upsert?: ConfirmEmailTokenUpsertWithWhereUniqueWithoutUserInput | ConfirmEmailTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConfirmEmailTokenCreateManyUserInputEnvelope
+    set?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    disconnect?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    delete?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    connect?: ConfirmEmailTokenWhereUniqueInput | ConfirmEmailTokenWhereUniqueInput[]
+    update?: ConfirmEmailTokenUpdateWithWhereUniqueWithoutUserInput | ConfirmEmailTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConfirmEmailTokenUpdateManyWithWhereWithoutUserInput | ConfirmEmailTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConfirmEmailTokenScalarWhereInput | ConfirmEmailTokenScalarWhereInput[]
+  }
+
+  export type PasswordRecoveryTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PasswordRecoveryTokenCreateWithoutUserInput, PasswordRecoveryTokenUncheckedCreateWithoutUserInput> | PasswordRecoveryTokenCreateWithoutUserInput[] | PasswordRecoveryTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordRecoveryTokenCreateOrConnectWithoutUserInput | PasswordRecoveryTokenCreateOrConnectWithoutUserInput[]
+    upsert?: PasswordRecoveryTokenUpsertWithWhereUniqueWithoutUserInput | PasswordRecoveryTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PasswordRecoveryTokenCreateManyUserInputEnvelope
+    set?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    disconnect?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    delete?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    connect?: PasswordRecoveryTokenWhereUniqueInput | PasswordRecoveryTokenWhereUniqueInput[]
+    update?: PasswordRecoveryTokenUpdateWithWhereUniqueWithoutUserInput | PasswordRecoveryTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PasswordRecoveryTokenUpdateManyWithWhereWithoutUserInput | PasswordRecoveryTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PasswordRecoveryTokenScalarWhereInput | PasswordRecoveryTokenScalarWhereInput[]
   }
 
   export type PurchaseCreateNestedManyWithoutCategoryInput = {
@@ -6639,18 +7986,32 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPurchasesInput, UserUpdateWithoutPurchasesInput>, UserUncheckedUpdateWithoutPurchasesInput>
   }
 
-  export type UserCreateNestedOneWithoutTokenInput = {
-    create?: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTokenInput
+  export type UserCreateNestedOneWithoutConfirmEmailTokenInput = {
+    create?: XOR<UserCreateWithoutConfirmEmailTokenInput, UserUncheckedCreateWithoutConfirmEmailTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConfirmEmailTokenInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutTokenNestedInput = {
-    create?: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTokenInput
-    upsert?: UserUpsertWithoutTokenInput
+  export type UserUpdateOneRequiredWithoutConfirmEmailTokenNestedInput = {
+    create?: XOR<UserCreateWithoutConfirmEmailTokenInput, UserUncheckedCreateWithoutConfirmEmailTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConfirmEmailTokenInput
+    upsert?: UserUpsertWithoutConfirmEmailTokenInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTokenInput, UserUpdateWithoutTokenInput>, UserUncheckedUpdateWithoutTokenInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConfirmEmailTokenInput, UserUpdateWithoutConfirmEmailTokenInput>, UserUncheckedUpdateWithoutConfirmEmailTokenInput>
+  }
+
+  export type UserCreateNestedOneWithoutRecoveryPasswordTokenInput = {
+    create?: XOR<UserCreateWithoutRecoveryPasswordTokenInput, UserUncheckedCreateWithoutRecoveryPasswordTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecoveryPasswordTokenInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRecoveryPasswordTokenNestedInput = {
+    create?: XOR<UserCreateWithoutRecoveryPasswordTokenInput, UserUncheckedCreateWithoutRecoveryPasswordTokenInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecoveryPasswordTokenInput
+    upsert?: UserUpsertWithoutRecoveryPasswordTokenInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRecoveryPasswordTokenInput, UserUpdateWithoutRecoveryPasswordTokenInput>, UserUncheckedUpdateWithoutRecoveryPasswordTokenInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6803,21 +8164,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ConfirmEmailTokensCreateWithoutUserInput = {
+  export type ConfirmEmailTokenCreateWithoutUserInput = {
     token: string
   }
 
-  export type ConfirmEmailTokensUncheckedCreateWithoutUserInput = {
+  export type ConfirmEmailTokenUncheckedCreateWithoutUserInput = {
     token: string
   }
 
-  export type ConfirmEmailTokensCreateOrConnectWithoutUserInput = {
-    where: ConfirmEmailTokensWhereUniqueInput
-    create: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput>
+  export type ConfirmEmailTokenCreateOrConnectWithoutUserInput = {
+    where: ConfirmEmailTokenWhereUniqueInput
+    create: XOR<ConfirmEmailTokenCreateWithoutUserInput, ConfirmEmailTokenUncheckedCreateWithoutUserInput>
   }
 
-  export type ConfirmEmailTokensCreateManyUserInputEnvelope = {
-    data: ConfirmEmailTokensCreateManyUserInput | ConfirmEmailTokensCreateManyUserInput[]
+  export type ConfirmEmailTokenCreateManyUserInputEnvelope = {
+    data: ConfirmEmailTokenCreateManyUserInput | ConfirmEmailTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PasswordRecoveryTokenCreateWithoutUserInput = {
+    token: string
+  }
+
+  export type PasswordRecoveryTokenUncheckedCreateWithoutUserInput = {
+    token: string
+  }
+
+  export type PasswordRecoveryTokenCreateOrConnectWithoutUserInput = {
+    where: PasswordRecoveryTokenWhereUniqueInput
+    create: XOR<PasswordRecoveryTokenCreateWithoutUserInput, PasswordRecoveryTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type PasswordRecoveryTokenCreateManyUserInputEnvelope = {
+    data: PasswordRecoveryTokenCreateManyUserInput | PasswordRecoveryTokenCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -6850,28 +8229,52 @@ export namespace Prisma {
     categoryId?: IntFilter<"Purchase"> | number
   }
 
-  export type ConfirmEmailTokensUpsertWithWhereUniqueWithoutUserInput = {
-    where: ConfirmEmailTokensWhereUniqueInput
-    update: XOR<ConfirmEmailTokensUpdateWithoutUserInput, ConfirmEmailTokensUncheckedUpdateWithoutUserInput>
-    create: XOR<ConfirmEmailTokensCreateWithoutUserInput, ConfirmEmailTokensUncheckedCreateWithoutUserInput>
+  export type ConfirmEmailTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConfirmEmailTokenWhereUniqueInput
+    update: XOR<ConfirmEmailTokenUpdateWithoutUserInput, ConfirmEmailTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<ConfirmEmailTokenCreateWithoutUserInput, ConfirmEmailTokenUncheckedCreateWithoutUserInput>
   }
 
-  export type ConfirmEmailTokensUpdateWithWhereUniqueWithoutUserInput = {
-    where: ConfirmEmailTokensWhereUniqueInput
-    data: XOR<ConfirmEmailTokensUpdateWithoutUserInput, ConfirmEmailTokensUncheckedUpdateWithoutUserInput>
+  export type ConfirmEmailTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConfirmEmailTokenWhereUniqueInput
+    data: XOR<ConfirmEmailTokenUpdateWithoutUserInput, ConfirmEmailTokenUncheckedUpdateWithoutUserInput>
   }
 
-  export type ConfirmEmailTokensUpdateManyWithWhereWithoutUserInput = {
-    where: ConfirmEmailTokensScalarWhereInput
-    data: XOR<ConfirmEmailTokensUpdateManyMutationInput, ConfirmEmailTokensUncheckedUpdateManyWithoutUserInput>
+  export type ConfirmEmailTokenUpdateManyWithWhereWithoutUserInput = {
+    where: ConfirmEmailTokenScalarWhereInput
+    data: XOR<ConfirmEmailTokenUpdateManyMutationInput, ConfirmEmailTokenUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ConfirmEmailTokensScalarWhereInput = {
-    AND?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
-    OR?: ConfirmEmailTokensScalarWhereInput[]
-    NOT?: ConfirmEmailTokensScalarWhereInput | ConfirmEmailTokensScalarWhereInput[]
-    userId?: IntFilter<"ConfirmEmailTokens"> | number
-    token?: StringFilter<"ConfirmEmailTokens"> | string
+  export type ConfirmEmailTokenScalarWhereInput = {
+    AND?: ConfirmEmailTokenScalarWhereInput | ConfirmEmailTokenScalarWhereInput[]
+    OR?: ConfirmEmailTokenScalarWhereInput[]
+    NOT?: ConfirmEmailTokenScalarWhereInput | ConfirmEmailTokenScalarWhereInput[]
+    userId?: IntFilter<"ConfirmEmailToken"> | number
+    token?: StringFilter<"ConfirmEmailToken"> | string
+  }
+
+  export type PasswordRecoveryTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: PasswordRecoveryTokenWhereUniqueInput
+    update: XOR<PasswordRecoveryTokenUpdateWithoutUserInput, PasswordRecoveryTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<PasswordRecoveryTokenCreateWithoutUserInput, PasswordRecoveryTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type PasswordRecoveryTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: PasswordRecoveryTokenWhereUniqueInput
+    data: XOR<PasswordRecoveryTokenUpdateWithoutUserInput, PasswordRecoveryTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PasswordRecoveryTokenUpdateManyWithWhereWithoutUserInput = {
+    where: PasswordRecoveryTokenScalarWhereInput
+    data: XOR<PasswordRecoveryTokenUpdateManyMutationInput, PasswordRecoveryTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PasswordRecoveryTokenScalarWhereInput = {
+    AND?: PasswordRecoveryTokenScalarWhereInput | PasswordRecoveryTokenScalarWhereInput[]
+    OR?: PasswordRecoveryTokenScalarWhereInput[]
+    NOT?: PasswordRecoveryTokenScalarWhereInput | PasswordRecoveryTokenScalarWhereInput[]
+    userId?: IntFilter<"PasswordRecoveryToken"> | number
+    token?: StringFilter<"PasswordRecoveryToken"> | string
   }
 
   export type PurchaseCreateWithoutCategoryInput = {
@@ -6938,7 +8341,8 @@ export namespace Prisma {
     createdAt?: Date | string
     password: string
     verified?: boolean
-    token?: ConfirmEmailTokensCreateNestedManyWithoutUserInput
+    confirmEmailToken?: ConfirmEmailTokenCreateNestedManyWithoutUserInput
+    recoveryPasswordToken?: PasswordRecoveryTokenCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPurchasesInput = {
@@ -6947,7 +8351,8 @@ export namespace Prisma {
     createdAt?: Date | string
     password: string
     verified?: boolean
-    token?: ConfirmEmailTokensUncheckedCreateNestedManyWithoutUserInput
+    confirmEmailToken?: ConfirmEmailTokenUncheckedCreateNestedManyWithoutUserInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPurchasesInput = {
@@ -6993,7 +8398,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
-    token?: ConfirmEmailTokensUpdateManyWithoutUserNestedInput
+    confirmEmailToken?: ConfirmEmailTokenUpdateManyWithoutUserNestedInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPurchasesInput = {
@@ -7002,57 +8408,116 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
-    token?: ConfirmEmailTokensUncheckedUpdateManyWithoutUserNestedInput
+    confirmEmailToken?: ConfirmEmailTokenUncheckedUpdateManyWithoutUserNestedInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutTokenInput = {
+  export type UserCreateWithoutConfirmEmailTokenInput = {
     email: string
     createdAt?: Date | string
     password: string
     verified?: boolean
     purchases?: PurchaseCreateNestedManyWithoutCreatorInput
+    recoveryPasswordToken?: PasswordRecoveryTokenCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutTokenInput = {
+  export type UserUncheckedCreateWithoutConfirmEmailTokenInput = {
     id?: number
     email: string
     createdAt?: Date | string
     password: string
     verified?: boolean
     purchases?: PurchaseUncheckedCreateNestedManyWithoutCreatorInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutTokenInput = {
+  export type UserCreateOrConnectWithoutConfirmEmailTokenInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
+    create: XOR<UserCreateWithoutConfirmEmailTokenInput, UserUncheckedCreateWithoutConfirmEmailTokenInput>
   }
 
-  export type UserUpsertWithoutTokenInput = {
-    update: XOR<UserUpdateWithoutTokenInput, UserUncheckedUpdateWithoutTokenInput>
-    create: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
+  export type UserUpsertWithoutConfirmEmailTokenInput = {
+    update: XOR<UserUpdateWithoutConfirmEmailTokenInput, UserUncheckedUpdateWithoutConfirmEmailTokenInput>
+    create: XOR<UserCreateWithoutConfirmEmailTokenInput, UserUncheckedCreateWithoutConfirmEmailTokenInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutTokenInput = {
+  export type UserUpdateToOneWithWhereWithoutConfirmEmailTokenInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutTokenInput, UserUncheckedUpdateWithoutTokenInput>
+    data: XOR<UserUpdateWithoutConfirmEmailTokenInput, UserUncheckedUpdateWithoutConfirmEmailTokenInput>
   }
 
-  export type UserUpdateWithoutTokenInput = {
+  export type UserUpdateWithoutConfirmEmailTokenInput = {
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
     purchases?: PurchaseUpdateManyWithoutCreatorNestedInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutTokenInput = {
+  export type UserUncheckedUpdateWithoutConfirmEmailTokenInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     password?: StringFieldUpdateOperationsInput | string
     verified?: BoolFieldUpdateOperationsInput | boolean
     purchases?: PurchaseUncheckedUpdateManyWithoutCreatorNestedInput
+    recoveryPasswordToken?: PasswordRecoveryTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutRecoveryPasswordTokenInput = {
+    email: string
+    createdAt?: Date | string
+    password: string
+    verified?: boolean
+    purchases?: PurchaseCreateNestedManyWithoutCreatorInput
+    confirmEmailToken?: ConfirmEmailTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRecoveryPasswordTokenInput = {
+    id?: number
+    email: string
+    createdAt?: Date | string
+    password: string
+    verified?: boolean
+    purchases?: PurchaseUncheckedCreateNestedManyWithoutCreatorInput
+    confirmEmailToken?: ConfirmEmailTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRecoveryPasswordTokenInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRecoveryPasswordTokenInput, UserUncheckedCreateWithoutRecoveryPasswordTokenInput>
+  }
+
+  export type UserUpsertWithoutRecoveryPasswordTokenInput = {
+    update: XOR<UserUpdateWithoutRecoveryPasswordTokenInput, UserUncheckedUpdateWithoutRecoveryPasswordTokenInput>
+    create: XOR<UserCreateWithoutRecoveryPasswordTokenInput, UserUncheckedCreateWithoutRecoveryPasswordTokenInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRecoveryPasswordTokenInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRecoveryPasswordTokenInput, UserUncheckedUpdateWithoutRecoveryPasswordTokenInput>
+  }
+
+  export type UserUpdateWithoutRecoveryPasswordTokenInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    purchases?: PurchaseUpdateManyWithoutCreatorNestedInput
+    confirmEmailToken?: ConfirmEmailTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRecoveryPasswordTokenInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    purchases?: PurchaseUncheckedUpdateManyWithoutCreatorNestedInput
+    confirmEmailToken?: ConfirmEmailTokenUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PurchaseCreateManyCreatorInput = {
@@ -7064,7 +8529,11 @@ export namespace Prisma {
     categoryId: number
   }
 
-  export type ConfirmEmailTokensCreateManyUserInput = {
+  export type ConfirmEmailTokenCreateManyUserInput = {
+    token: string
+  }
+
+  export type PasswordRecoveryTokenCreateManyUserInput = {
     token: string
   }
 
@@ -7094,15 +8563,27 @@ export namespace Prisma {
     categoryId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ConfirmEmailTokensUpdateWithoutUserInput = {
+  export type ConfirmEmailTokenUpdateWithoutUserInput = {
     token?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ConfirmEmailTokensUncheckedUpdateWithoutUserInput = {
+  export type ConfirmEmailTokenUncheckedUpdateWithoutUserInput = {
     token?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ConfirmEmailTokensUncheckedUpdateManyWithoutUserInput = {
+  export type ConfirmEmailTokenUncheckedUpdateManyWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PasswordRecoveryTokenUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PasswordRecoveryTokenUncheckedUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PasswordRecoveryTokenUncheckedUpdateManyWithoutUserInput = {
     token?: StringFieldUpdateOperationsInput | string
   }
 

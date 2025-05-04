@@ -66,7 +66,7 @@ export class AuthService {
 
     const confirmToken = generateRandomString(String(createdUser.id));
 
-    await this.prisma.confirmEmailTokens.create({
+    await this.prisma.confirmEmailToken.create({
       data: {
         userId: createdUser.id,
         token: confirmToken,
@@ -92,6 +92,62 @@ export class AuthService {
     };
   }
 
+  async forgotPassword(email: string) {
+    const existingUser = await this.usersService.findOneByEmail(email);
+    if (!existingUser) {
+      throw new BadRequestException('There is no user with this email');
+    }
+
+    const forgotToken = generateRandomString(String(existingUser.id));
+
+    await this.prisma.passwordRecoveryToken.create({
+      data: {
+        userId: existingUser.id,
+        token: forgotToken,
+      },
+    });
+
+    await this.emailService.sendEmail({
+      recipients: [existingUser.email],
+      subject: 'Password Recovery',
+      html: `
+        <div>
+          <h1>Recover Your Password</h1>
+          <p>To reset your password, please click the link below:</p>
+          <a href="${this.configService.get('CLIENT_URL')}/auth?token=${forgotToken}">Reset Password</a>
+          <p>If you did not request this, please ignore this email.</p>
+        </div>
+      `,
+    });
+
+    return {
+      success: true,
+      message: 'Email with a link to change your password has been sent',
+    };
+  }
+
+  async changePassword(token: string, password: string) {
+    const existingUser =
+      await this.usersService.findOneByRecoveryPasswordToken(token);
+    if (!existingUser) {
+      throw new BadRequestException('User was not found: invalid token');
+    }
+
+    await this.usersService.update(existingUser.id, {
+      password: await argon2.hash(password),
+    });
+
+    await this.prisma.passwordRecoveryToken.delete({
+      where: {
+        userId: existingUser.id,
+      },
+    });
+
+    return {
+      success: true,
+    };
+  }
+
   async getProfileByEmail(email: User['email']) {
     const userInfo = await this.usersService.findOneByEmail(email);
     if (!userInfo) {
@@ -107,7 +163,7 @@ export class AuthService {
   }
 
   async confirmEmail(token: string, res: Response) {
-    const userToken = await this.prisma.confirmEmailTokens.findUnique({
+    const userToken = await this.prisma.confirmEmailToken.findUnique({
       where: {
         token: token,
       },
@@ -119,7 +175,7 @@ export class AuthService {
 
     await this.usersService.verify(userToken.userId);
 
-    await this.prisma.confirmEmailTokens.delete({
+    await this.prisma.confirmEmailToken.delete({
       where: {
         userId: userToken.userId,
       },
