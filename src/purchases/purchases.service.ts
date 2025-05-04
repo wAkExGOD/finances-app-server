@@ -4,6 +4,11 @@ import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { PrismaService } from 'src/prisma.service';
 import { months } from 'src/constants/months';
 
+type MonthlySpendingByCategory = {
+  month: string;
+  [categoryId: number]: number;
+}[];
+
 @Injectable()
 export class PurchasesService {
   constructor(private readonly prisma: PrismaService) {}
@@ -36,7 +41,7 @@ export class PurchasesService {
       where: {
         createdBy: userId,
         createdAt: {
-          gte: new Date(new Date().setMonth(new Date().getMonth() - 3)), // Получаем данные за последние 3 месяца
+          gte: new Date(new Date().setMonth(new Date().getMonth() - 3)),
         },
       },
       select: {
@@ -56,7 +61,6 @@ export class PurchasesService {
 
     const categoryIds = categories.map((category) => category.id);
 
-    // Заполняем статистику для каждого дня за последние 3 месяца
     const startDate = new Date();
     startDate.setMonth(startDate.getMonth() - 3);
 
@@ -65,7 +69,7 @@ export class PurchasesService {
       d <= new Date();
       d.setDate(d.getDate() + 1)
     ) {
-      const dateKey = d.toISOString().split('T')[0]; // Формат YYYY-MM-DD
+      const dateKey = d.toISOString().split('T')[0];
       statistics[dateKey] = { date: dateKey };
       categoryIds.forEach((id) => {
         statistics[dateKey][id] = 0;
@@ -74,7 +78,7 @@ export class PurchasesService {
 
     purchases.forEach((purchase) => {
       const date = new Date(purchase.createdAt);
-      const dateKey = date.toISOString().split('T')[0]; // Формат YYYY-MM-DD
+      const dateKey = date.toISOString().split('T')[0];
 
       if (statistics[dateKey]) {
         statistics[dateKey][purchase.categoryId] += purchase.price;
@@ -86,47 +90,51 @@ export class PurchasesService {
     return result;
   }
 
-  // async getMonthlyStatistics(userId: number) {
-  //   const purchases = await this.prisma.purchase.findMany({
-  //     where: {
-  //       createdBy: userId,
-  //     },
-  //     select: {
-  //       price: true,
-  //       createdAt: true,
-  //       categoryId: true,
-  //     },
-  //   });
+  async getMonthlySpendingByCategory(
+    userId: number,
+    categoryId: number,
+  ): Promise<MonthlySpendingByCategory> {
+    const currentDate = new Date();
+    const startYear = currentDate.getFullYear();
+    const startMonth = currentDate.getMonth();
 
-  //   const statistics: {
-  //     [monthKey: string]: { month: string; [categoryId: number]: number };
-  //   } = {};
+    const purchases = await this.prisma.purchase.findMany({
+      where: {
+        categoryId,
+        createdBy: userId,
+        createdAt: {
+          gte: new Date(startYear, startMonth - 11, 1),
+          lte: new Date(startYear, startMonth + 1, 0),
+        },
+      },
+    });
 
-  //   const categories = await this.prisma.purchaseCategory.findMany({
-  //     select: { id: true },
-  //   });
+    const monthlySpending = new Array(12).fill(0) as number[];
 
-  //   const categoryIds = categories.map((category) => category.id);
+    purchases.forEach((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      const monthIndex =
+        (purchaseDate.getFullYear() - startYear) * 12 +
+        purchaseDate.getMonth() -
+        startMonth +
+        11;
+      if (monthIndex >= 0 && monthIndex < 12) {
+        monthlySpending[monthIndex] += purchase.price;
+      }
+    });
 
-  //   months.forEach((month, index) => {
-  //     const yearMonth = `${new Date().getFullYear()}-${index + 1}`;
-  //     statistics[yearMonth] = { month };
-  //     categoryIds.forEach((id) => {
-  //       statistics[yearMonth][id] = 0;
-  //     });
-  //   });
+    const result = monthlySpending.map((amount, index) => {
+      const monthOffset = index - 11;
+      const year = startYear + Math.floor((startMonth + monthOffset) / 12);
+      const month = new Date(
+        year,
+        (startMonth + monthOffset) % 12,
+      ).toLocaleString('en-US', { month: 'long' });
+      return { month: `${month} ${year}`, [categoryId]: amount };
+    });
 
-  //   purchases.forEach((purchase) => {
-  //     const date = new Date(purchase.createdAt);
-  //     const yearMonth = `${date.getFullYear()}-${date.getMonth() + 1}`;
-
-  //     statistics[yearMonth][purchase.categoryId] += purchase.price;
-  //   });
-
-  //   const result = Object.values(statistics);
-
-  //   return result;
-  // }
+    return result;
+  }
 
   async getOne(userId: number, id: number) {
     const purchase = await this.prisma.purchase.findUnique({

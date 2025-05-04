@@ -35,9 +35,21 @@ export class PurchasesController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('statistics')
+  @Get('statistics/daily')
   async getStatistics(@Request() req: RequestWithUser) {
     return this.purchasesService.getDailyStatistics(+req.user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('statistics/category/:id')
+  async getMonthlySpendingByCategory(
+    @Request() req: RequestWithUser,
+    @Param() params: FindOneParams,
+  ) {
+    return this.purchasesService.getMonthlySpendingByCategory(
+      +req.user.id,
+      +params.id,
+    );
   }
 
   @UseGuards(JwtAuthGuard)
