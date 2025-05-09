@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
 import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { PrismaService } from 'src/prisma.service';
-import { months } from 'src/constants/months';
 
 type MonthlySpendingByCategory = {
   month: string;
@@ -18,6 +17,8 @@ export class PurchasesService {
     filter: string,
     sortBy: string,
     order: 'asc' | 'desc',
+    page: number = 1,
+    pageSize: number = 10,
   ) {
     const purchases = await this.prisma.purchase.findMany({
       where: {
@@ -31,9 +32,26 @@ export class PurchasesService {
       orderBy: {
         [sortBy]: order,
       },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     });
 
-    return purchases;
+    const totalCount = await this.prisma.purchase.count({
+      where: {
+        createdBy: userId,
+        name: {
+          contains: filter,
+          mode: 'insensitive',
+        },
+      },
+    });
+
+    return {
+      totalCount,
+      totalPages: Math.ceil(totalCount / pageSize),
+      currentPage: page,
+      purchases,
+    };
   }
 
   async getDailyStatistics(userId: number) {

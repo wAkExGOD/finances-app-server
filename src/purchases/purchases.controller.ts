@@ -11,6 +11,7 @@ import {
   UsePipes,
   Patch,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { PurchasesService } from './purchases.service';
 import { CreatePurchaseDto } from './dto/create-purchase.dto';
@@ -30,8 +31,17 @@ export class PurchasesController {
     @Query('filter') filter: string,
     @Query('sortBy') sortBy: 'price' | 'createdAt' = 'createdAt',
     @Query('order') order: 'asc' | 'desc' = 'desc',
+    @Query('page', ParseIntPipe) page: number = 1,
+    @Query('pageSize', ParseIntPipe) pageSize: number = 10,
   ) {
-    return this.purchasesService.getAll(+req.user.id, filter, sortBy, order);
+    return this.purchasesService.getAll(
+      +req.user.id,
+      filter,
+      sortBy,
+      order,
+      page,
+      pageSize,
+    );
   }
 
   @UseGuards(JwtAuthGuard)
