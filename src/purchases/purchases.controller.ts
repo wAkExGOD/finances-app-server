@@ -19,6 +19,7 @@ import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 import { RequestWithUser } from 'src/types';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { FindOneParams } from './dto/find-one-params.dto';
+import { DatePeriodDto } from './dto/date-period.dto';
 
 @Controller('purchases')
 export class PurchasesController {
@@ -59,6 +60,19 @@ export class PurchasesController {
     return this.purchasesService.getMonthlySpendingByCategory(
       +req.user.id,
       +params.id,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('statistics/for-period')
+  async getSpendingStatsForPeriod(
+    @Request() req: RequestWithUser,
+    @Body() datePeriodDto: DatePeriodDto,
+  ) {
+    return this.purchasesService.getSpendingStatsForPeriod(
+      +req.user.id,
+      datePeriodDto.startDate,
+      datePeriodDto.endDate,
     );
   }
 

@@ -8,6 +8,14 @@ type MonthlySpendingByCategory = {
   [categoryId: number]: number;
 }[];
 
+type SpendingForPeriod = {
+  total: number;
+  categories: {
+    name: string;
+    value: number;
+  }[];
+};
+
 @Injectable()
 export class PurchasesService {
   constructor(private readonly prisma: PrismaService) {}
@@ -152,6 +160,46 @@ export class PurchasesService {
     });
 
     return result;
+  }
+
+  async getSpendingStatsForPeriod(
+    userId: number,
+    startDate: string,
+    endDate: string,
+  ): Promise<SpendingForPeriod> {
+    const purchases = await this.prisma.purchase.findMany({
+      where: {
+        createdBy: userId,
+        createdAt: {
+          gte: new Date(startDate),
+          lte: new Date(endDate),
+        },
+      },
+      include: {
+        category: true,
+      },
+    });
+
+    const total = purchases.reduce((acc, purchase) => acc + purchase.price, 0);
+
+    const categories = purchases.reduce(
+      (acc, purchase) => {
+        const categoryName = purchase.category.name;
+
+        if (!acc[categoryName]) {
+          acc[categoryName] = { name: categoryName, value: 0 };
+        }
+
+        acc[categoryName].value += purchase.price;
+        return acc;
+      },
+      {} as Record<string, { name: string; value: number }>,
+    );
+
+    return {
+      total,
+      categories: Object.values(categories),
+    };
   }
 
   async getOne(userId: number, id: number) {
